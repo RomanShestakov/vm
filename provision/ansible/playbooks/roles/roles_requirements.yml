@@ -1,0 +1,46 @@
+# roles_requirements.yml
+
+# from galaxy
+# - src: yatesr.timezone
+
+- src: git+https://github.com/geerlingguy/ansible-role-git.git
+  version: "1.1.1"
+  name: geerlingguy.git
+
+- src: git+https://github.com/RomanShestakov/build-essential.git
+  #version: "v1.0.1"
+  name: ANXS.build-essential
+
+- src: git+https://github.com/ANXS/python.git
+  version: "v1.0.1"
+  name: ANXS.python
+
+- src: git+https://github.com/RomanShestakov/ansible-role-miniconda.git
+  name: nicholsn.miniconda
+
+- src: git+https://github.com/RomanShestakov/ansible-role-emacs.git
+  name: RomanShestakov.ansible-role-emacs
+
+- src: git+https://github.com/RomanShestakov/ansible-role-tmux.git
+  name: RomanShestakov.ansible-role-tmux
+
+- src: git+https://github.com/RomanShestakov/ansible-role-dotfiles.git
+  name: RomanShestakov.ansible-role-dotfiles
+
+- src: git+https://github.com/RomanShestakov/ansible-role-conda-packages
+  name: RomanShestakov.ansible-role-conda-packages
+
+# - src: git+https://github.com/knopki/ansible-locale.git
+#   name: knopki.locale
+
+# - src: git+https://github.com/Stouts/Stouts.timezone.git
+#   name: Stouts.timezone
+
+# - src: git+https://github.com/Stouts/Stouts.hostname.git
+#   name: Stouts.hostname
+
+- src: git+https://github.com/kfieldho/ansible-role-cmake.git
+  name: kfieldho/ansible-role-cmake
+
+- src: git+https://github.com/RomanShestakov/ansible-role-llvm
+  name: RomanShestakov.ansible-role-llvm

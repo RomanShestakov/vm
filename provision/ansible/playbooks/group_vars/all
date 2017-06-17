@@ -1,0 +1,9 @@
+erlang_version: "17.3"
+postgresql_version: 9.4
+erlang_build_flags: ""
+emacs_repo_url: "https://github.com/emacs-mirror/emacs.git"
+emacs_version: "emacs-24.5"
+dotfiles_repo_url: "https://github.com/RomanShestakov/dotfiles.git"
+dot_emacs_repo_url: "https://github.com/RomanShestakov/.emacs.d.git"
+miniconda_dir: "/opt/miniconda"
+nfs: 192.168.1.79

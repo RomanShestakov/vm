@@ -1,0 +1,8 @@
+#+TITLE: README for Vagrant dev linux box
+#+AUTHOR:   Roman Shestakov
+#+LANGUAGE: en
+
+* Description
+
+A Vagrant VM provisioned with ansible. This VM uses standard centos.
+Used to test code examples from Advanced Programming in Unix

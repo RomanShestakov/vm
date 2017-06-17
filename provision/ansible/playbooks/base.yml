@@ -1,0 +1,11 @@
+# base.yml - play to install a VM
+
+- name: base.yml
+  hosts: all
+
+  roles:
+    - { role: geerlingguy.git, become: yes, tags: ["git"] }
+    - { role: ANXS.build-essential, become: yes, tags: ["build-essensial"] }
+    - { role: RomanShestakov.ansible-role-tmux, become: yes, tags: ["tmux"] }
+    - { role: RomanShestakov.erlang, become: yes, tags: ["erlang"] }
+    - { role: RomanShestakov.ansible-role-emacs, become: yes, tags: ["emacs"] }

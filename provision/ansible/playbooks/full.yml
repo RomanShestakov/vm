@@ -1,0 +1,21 @@
+# full.yml - play to install a VM
+
+- name: full.yml
+  hosts: all
+
+  roles:
+    # - { role: ANXS.git, sudo: yes, tags: ["git"] }
+    - { role: geerlingguy.git, become: yes, tags: ["git"] }
+    - { role: RomanShestakov.ansible-role-dotfiles, dotfiles_dest: "/home/vagrant" }
+    - { role: RomanShestakov.ansible-role-tmux, sudo: yes, tags: ["tmux"] }
+    - { role: RomanShestakov.erlang, sudo: yes, tags: ["erlang"] }
+    # - { role: mtpereira.erlang, become: yes, tags: ["erlang"] }
+    - { role: RomanShestakov.ansible-role-emacs, sudo: yes, tags: ["emacs"] }
+    # # - { role: ANXS.postgresql, sudo: yes, tags: ["postgresql"] }
+    - { role: nicholsn.miniconda, tags: ["miniconda"], miniconda_home: '/home/vagrant/miniconda' }
+    - { role: RomanShestakov.ansible-role-conda-packages }
+
+  post_tasks:
+    - name: .EMACS | get .emacs git repository
+      git: repo={{ dot_emacs_repo_url }} dest="/home/vagrant/.emacs.d" accept_hostkey=yes
+      sudo: False
