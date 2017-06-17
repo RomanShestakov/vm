@@ -4,11 +4,11 @@
   hosts: all
 
   roles:
-    - { role: ANXS.build-essential, become: yes, tags: ["build-essensial"] }
+    # - { role: ANXS.build-essential, become: yes, tags: ["build-essensial"] }
     - { role: RomanShestakov.ansible-role-dotfiles, dotfiles_dest: "/home/vagrant" }
     - { role: nicholsn.miniconda, tags: ["miniconda"], miniconda_home: '/opt/miniconda', url: 'https://repo.continuum.io/miniconda/Miniconda3-4.3.14-Linux-x86_64.sh'}
     - { role: RomanShestakov.ansible-role-conda-packages, conda_dir: "/opt/miniconda", tags: ["conda"] }
-    - { role: kfieldho/ansible-role-cmake, cmake_version: 3.8, tags: ["cmake"] }
+    - { role: kfieldho/ansible-role-cmake, cmake_version: 3.8, cmake_minor_version: 2, cmake_dest_dir: /usr/local/bin, tags: ["cmake"] }
     - { role: RomanShestakov.ansible-role-llvm, tags: ["llvm"] }
 
   post_tasks:
