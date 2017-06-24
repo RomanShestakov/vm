@@ -6,3 +6,9 @@
 
 A Vagrant VM provisioned with ansible. This VM uses standard centos.
 Used to test code examples from Advanced Programming in Unix
+
+
+
+http://pythondata.com/jupyter-vagrant/
+jupyter notebook --ip=0.0.0.0
+http://0.0.0.0:8888/tree

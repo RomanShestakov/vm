@@ -1,3 +1,4 @@
+
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
@@ -29,8 +30,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname = "base.local"
   config.vm.network :private_network, ip: "192.168.111.222"
   config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 8888, host: 8888
 
-  # sync folders
+    # sync folders
   config.vm.synced_folder "/Users/romanshestakov/development/unix_programming", "/home/vagrant/unix_programming"
 
 
