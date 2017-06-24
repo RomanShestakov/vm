@@ -5,5 +5,5 @@ emacs_repo_url: "https://github.com/emacs-mirror/emacs.git"
 emacs_version: "emacs-24.5"
 dotfiles_repo_url: "https://github.com/RomanShestakov/dotfiles.git"
 dot_emacs_repo_url: "https://github.com/RomanShestakov/.emacs.d.git"
-miniconda_dir: "/opt/anaconconda"
+miniconda_dir: "/opt/anaconda"
 nfs: 192.168.1.79

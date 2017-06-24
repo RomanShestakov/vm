@@ -8,16 +8,16 @@
   name: geerlingguy.git
 
 # - src: git+https://github.com/RomanShestakov/build-essential.git
-- src: git+https://github.com/ANXS/build-essential.git
-  #version: "v1.0.1"
-  name: ANXS.build-essential
+# - src: git+https://github.com/ANXS/build-essential.git
+#   #version: "v1.0.1"
+#   name: ANXS.build-essential
 
-- src: git+https://github.com/ANXS/python.git
-  version: "v1.0.1"
-  name: ANXS.python
+# - src: git+https://github.com/ANXS/python.git
+#   version: "v1.0.1"
+#   name: ANXS.python
 
 - src: git+https://github.com/RomanShestakov/ansible-role-miniconda.git
-  name: nicholsn.miniconda
+  name: RomanShestakov.miniconda
 
 - src: git+https://github.com/RomanShestakov/ansible-role-emacs.git
   name: RomanShestakov.ansible-role-emacs
