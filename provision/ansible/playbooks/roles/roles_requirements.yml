@@ -7,10 +7,10 @@
   version: "1.1.1"
   name: geerlingguy.git
 
-# - src: git+https://github.com/RomanShestakov/build-essential.git
-# - src: git+https://github.com/ANXS/build-essential.git
-#   #version: "v1.0.1"
-#   name: ANXS.build-essential
+- src: git+https://github.com/RomanShestakov/build-essential.git
+- src: git+https://github.com/ANXS/build-essential.git
+  #version: "v1.0.1"
+  name: ANXS.build-essential
 
 # - src: git+https://github.com/ANXS/python.git
 #   version: "v1.0.1"

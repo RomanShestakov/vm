@@ -4,13 +4,13 @@
   hosts: all
 
   roles:
+    - { role: ANXS.build-essential }
     - { role: RomanShestakov.ansible-role-dotfiles, dotfiles_dest: "/home/vagrant" }
-    - { role: RomanShestakov.miniconda, miniconda_home: "/opt/anaconda",
-               url: 'https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.sh'}
+    - { role: RomanShestakov.miniconda, miniconda_home: "/opt/anaconda", url: 'https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.sh'}
     - { role: RomanShestakov.ansible-role-conda-packages, conda_dir: "/opt/anaconda", tags: ["conda"] }
     - { role: RomanShestakov.ansible-role-cmake, cmake_version: 3.8, cmake_minor_version: 2, tags: ["cmake"] }
     - { role: RomanShestakov.ansible-role-gcc, tags: ["gcc"] }
-    # - { role: RomanShestakov.ansible-role-rtags, rtags_version: v2.10, tags: ["rtags"] }
+    - { role: RomanShestakov.ansible-role-rtags, rtags_version: v2.10, tags: ["rtags"] }
 
   post_tasks:
     - name: .EMACS | get .emacs git repository
