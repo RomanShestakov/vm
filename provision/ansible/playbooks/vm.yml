@@ -2,15 +2,27 @@
 
 - name: vm.yml
   hosts: all
+  # connection: paramiko
+  # vars:
+  #   ansible_ssh_private_key_file: /path/to/private_key
+  #   ansible_ssh_pass: passphrase_for_private_key
+
+  # https://stackoverflow.com/questions/35616021/ansible-sudo-hangs-after-5-tasks
+  pre_tasks:
+    - name: Disable Fingerprint checking that may be enabled.  When enabled, causes SSH issues.
+      command: authconfig --disablefingerprint --update
 
   roles:
     - { role: ANXS.build-essential }
+    - { role: RomanShestakov.ansible-role-common-tools }
     - { role: RomanShestakov.ansible-role-dotfiles, dotfiles_dest: "/home/vagrant" }
     - { role: RomanShestakov.miniconda, miniconda_home: "/opt/anaconda", url: 'https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.sh'}
+    - { role: RomanShestakov.erlang, become: yes, erlang_version: "20.0", tags: ["erlang"] }
     - { role: RomanShestakov.ansible-role-conda-packages, conda_dir: "/opt/anaconda", tags: ["conda"] }
     - { role: RomanShestakov.ansible-role-cmake, cmake_version: 3.8, cmake_minor_version: 2, tags: ["cmake"] }
-    - { role: RomanShestakov.ansible-role-gcc, tags: ["gcc"] }
-    - { role: RomanShestakov.ansible-role-rtags, rtags_version: v2.10, tags: ["rtags"] }
+    - { role: RomanShestakov.ansible-role-gcc, gcc_version: 4.8.5, binutils_version: 2.23, tags: ["gcc"] }
+    - { role: RomanShestakov.ansible-role-llvm, llvm_version: release_40, gcc_version: 4.8.5, tags: ["llvm"] }
+    - { role: RomanShestakov.ansible-role-rtags, rtags_version: "v2.10", llvm_version: 4.0, gcc_version: 4.8.5, tags: ["rtags"] }
 
   post_tasks:
     - name: .EMACS | get .emacs git repository

@@ -16,6 +16,10 @@
 #   version: "v1.0.1"
 #   name: ANXS.python
 
+- src: git+https://github.com/RomanShestakov/erlang.git
+  #version: "v1.1.0"
+  name: RomanShestakov.erlang
+
 - src: git+https://github.com/RomanShestakov/ansible-role-miniconda.git
   name: RomanShestakov.miniconda
 
@@ -46,11 +50,14 @@
 # - src: git+https://github.com/AlbanAndrieu/ansible-cmake.git
 #   name: alban.andrieu.cmake
 
-# - src: git+https://github.com/RomanShestakov/ansible-role-llvm
-#   name: RomanShestakov.ansible-role-llvm
+- src: git+https://github.com/RomanShestakov/ansible-role-llvm
+  name: RomanShestakov.ansible-role-llvm
 
 - src: git+https://github.com/RomanShestakov/ansible-role-gcc.git
   name: RomanShestakov.ansible-role-gcc
 
 - src: git+https://github.com/RomanShestakov/ansible-role-rtags.git
   name: RomanShestakov.ansible-role-rtags
+
+- src: git+https://github.com/RomanShestakov/ansible-role-common-tools.git
+  name: RomanShestakov.ansible-role-common-tools
