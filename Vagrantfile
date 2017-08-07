@@ -33,7 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network "forwarded_port", guest: 8888, host: 8888
 
     # sync folders
-  config.vm.synced_folder "/Users/romanshestakov/development/unix_programming", "/home/vagrant/unix_programming"
+  config.vm.synced_folder "/Users/romanshestakov/development", "/home/vagrant/development"
 
 
   # # Enable SSH agent forwarding for github
