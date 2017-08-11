@@ -1,5 +1,5 @@
 erlang_version: "17.3"
-postgresql_version: 9.4
+# postgresql_version: 9.4
 erlang_build_flags: ""
 emacs_repo_url: "https://github.com/emacs-mirror/emacs.git"
 emacs_version: "emacs-24.5"

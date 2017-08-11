@@ -12,3 +12,8 @@ Used to test code examples from Advanced Programming in Unix
 http://pythondata.com/jupyter-vagrant/
 jupyter notebook --ip=0.0.0.0
 http://0.0.0.0:8888/tree
+
+vagrant up
+## ssh to one of the hosts:
+vagrant ssh vagrant1
+vagrant ssh vagrant2
