@@ -21,9 +21,9 @@
     # - { role: RomanShestakov.erlang, become: yes, erlang_version: "20.0", tags: ["erlang"] }
     - { role: RomanShestakov.ansible-role-conda-packages, conda_dir: "/opt/anaconda", tags: ["conda"] }
     - { role: RomanShestakov.ansible-role-cmake, cmake_version: 3.8, cmake_minor_version: 2, tags: ["cmake"] }
-    - { role: RomanShestakov.ansible-role-gcc, tags: ["gcc"] }
-    - { role: RomanShestakov.ansible-role-llvm, llvm_version: release_40, tags: ["llvm"] }
-    - { role: RomanShestakov.ansible-role-rtags, rtags_version: "v2.10", llvm_version: 4.0, tags: ["rtags"] }
+    - { role: RomanShestakov.ansible-role-gcc, gcc_version: 4.8.5, binutils_version: 2.23, tags: ["gcc"] }
+    - { role: RomanShestakov.ansible-role-llvm, llvm_version: release_40, gcc_version: 4.8.5, tags: ["llvm"] }
+    - { role: RomanShestakov.ansible-role-rtags, rtags_version: "v2.10", llvm_version: 4.0, llvm_version: 4.0, gcc_version: 4.8.5, tags: ["rtags"] }
     # - { role: RomanShestakov.ansible-role-zmq, zmq_version: master, tags: ["zmq"] }
     # - { role: RomanShestakov.ansible-role-flatbuffers, fb_version: v1.7.1, tags: ["fb"] }
 
