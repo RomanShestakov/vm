@@ -48,6 +48,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.forward_agent = true
   config.ssh.insert_key = false
 
+  config.vm.boot_timeout = 900
+
   # run ansible
   config.vm.provision "ansible" do |ansible|
     ansible.sudo = true
