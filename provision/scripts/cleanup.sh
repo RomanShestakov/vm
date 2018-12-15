@@ -1,13 +1,8 @@
 #!/bin/bash -eux
 
-# Uninstall Ansible and remove PPA.
-apt-get -y remove --purge ansible
-apt-add-repository --remove ppa:ansible/ansible
-apt-get autoremove
-apt-get update
-
-# Delete unneeded files.
-rm -f /home/vagrant/*.sh
+# Remove Ansible and its dependencies.
+pip freeze | grep -v "^-e" | xargs pip uninstall -y
+yum -y remove git python-setuptools gcc libffi-devel python-devel openssl-devel
 
 # Zero out the rest of the free space using dd, then delete the written file.
 dd if=/dev/zero of=/EMPTY bs=1M

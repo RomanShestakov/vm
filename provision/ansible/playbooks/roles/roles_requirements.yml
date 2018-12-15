@@ -4,7 +4,7 @@
 # - src: yatesr.timezone
 
 - src: git+https://github.com/geerlingguy/ansible-role-git.git
-  version: "1.4.0"
+  version: "2.0.3"
   name: geerlingguy.git
 
 - src: git+https://github.com/RomanShestakov/build-essential.git
@@ -67,3 +67,6 @@
 
 - src: git+https://github.com/RomanShestakov/ansible-role-flatbuffers.git
   name: RomanShestakov.ansible-role-flatbuffers
+
+- src: git+https://github.com/RomanShestakov/ansible-role-irony.git
+  name: RomanShestakov.ansible-role-irony

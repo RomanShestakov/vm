@@ -1,10 +1,10 @@
 #!/bin/bash -eux
 
-# Install Ansible repository.
-apt-get -y update && apt-get -y upgrade
-apt-get -y install software-properties-common
-apt-add-repository ppa:ansible/ansible
+# Install EPEL repository.
+rpm -ivh http://mirror.pnl.gov/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
 
 # Install Ansible.
-apt-get -y update
-apt-get -y install ansible
+yum -y install git python-setuptools gcc sudo libffi-devel python-devel openssl-devel wget
+yum clean all
+easy_install pip
+pip install ansible
