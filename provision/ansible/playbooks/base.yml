@@ -4,7 +4,7 @@
   hosts: all
 
   roles:
-    - { role: geerlingguy.git, become: yes, git_install_from_source: true, git_install_from_source_force_update: true, git_version: "2.16.2", tags: ["git"] }
+    - { role: geerlingguy.git, become: yes, git_enablerepo: "http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm", git_install_from_source: false, git_version: "2.18.0", tags: ["git"] }
     - { role: ANXS.build-essential, become: yes, tags: ["build-essensial"] }
     - { role: RomanShestakov.ansible-role-common-tools, become: yes, tags: ["build-common"] }
     - { role: RomanShestakov.ansible-role-cmake, cmake_version: 3.8, cmake_minor_version: 2, tags: ["cmake"] }
