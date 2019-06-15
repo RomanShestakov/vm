@@ -28,6 +28,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vagrant1.vm.network :private_network, ip: "192.168.111.222"
     vagrant1.vm.network "forwarded_port", guest: 80, host: 8080
     vagrant1.vm.network "forwarded_port", guest: 8888, host: 8888
+    vagrant1.vm.network "forwarded_port", id: "ssh", guest: 22, host: 2222
+
+    vagrant1.vm.provider "virtualbox" do |pmv|
+      pmv.memory = 4096
+      pmv.cpus = 4
+    end
   end
 
   # config.vm.define "vagrant2" do |vagrant2|

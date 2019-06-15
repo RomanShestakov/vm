@@ -13,27 +13,27 @@
       command: authconfig --disablefingerprint --update
 
   roles:
-    # - { role: RomanShestakov.ansible-role-common-tools }
-    #- { role: geerlingguy.git, become: yes, git_install_from_source: true, git_version: "2.16.2", tags: ["git"] }
+    - { role: geerlingguy.git, become: yes, workspace: /root, git_install_from_source: true, git_version: "2.16.2", tags: ["git"] }
     - { role: RomanShestakov.ansible-role-dotfiles, dotfiles_dest: "/home/vagrant" }
     - { role: RomanShestakov.ansible-role-tmux, become: yes, tags: ["tmux"] }
     # - { role: RomanShestakov.miniconda, miniconda_home: "/opt/anaconda", url: 'https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.sh'}
     # - { role: RomanShestakov.erlang, become: yes, erlang_version: "20.0", tags: ["erlang"] }
     # - { role: RomanShestakov.ansible-role-conda-packages, conda_dir: "/opt/anaconda", tags: ["conda"] }
     # - { role: RomanShestakov.ansible-role-cmake, cmake_version: 3.8, cmake_minor_version: 2, tags: ["cmake"] }
-    #- { role: RomanShestakov.ansible-role-gcc, gcc_version: 8.2.0, binutils_version: 2.31, gdb_version: 8.2, tags: ["gcc"] }
+    # - { role: RomanShestakov.ansible-role-gcc, gcc_version: 8.2.0, binutils_version: 2.31, gdb_version: 8.2, tags: ["gcc"] }
     # - { role: RomanShestakov.ansible-role-gcc, gcc_version: 4.8.5, binutils_version: 2.23, tags: ["gcc"] }
     # - { role: RomanShestakov.ansible-role-gcc, gcc_version: 4.9.4, binutils_version: 2.23, tags: ["gcc"] }
     # - { role: RomanShestakov.ansible-role-gcc, gcc_version: 6.3.0, binutils_version: 2.24, tags: ["gcc"] }
-    - { role: RomanShestakov.ansible-role-llvm, llvm_version: release_40, gcc_version: 4.9.4, tags: ["llvm"] }
+    # - { role: RomanShestakov.ansible-role-llvm, llvm_version: release_40, gcc_version: 4.9.4, tags: ["llvm"] }
     #- { role: RomanShestakov.ansible-role-llvm, llvm_version: release_40, gcc_version: 6.3.0, tags: ["llvm"] }
     # - { role: RomanShestakov.ansible-role-rtags, rtags_version: "v2.10", llvm_version: 4.0, llvm_version: 4.0, gcc_version: 6.3.0, tags: ["rtags"] }
     # - { role: RomanShestakov.ansible-role-rtags, rtags_version: "v2.20", llvm_version: 4.0, gcc_version: 4.9.4, tags: ["rtags"] }
-    - { role: RomanShestakov.ansible-role-rtags, rtags_version: "v2.20", llvm_version: 4.0, gcc_version: 4.9.4, tags: ["rtags"] }
-    - { role: RomanShestakov.ansible-role-irony, irony_version: "v1.2.0", llvm_version: 4.0, gcc_version: 4.9.4, tags: ["irony"] }
+    # - { role: RomanShestakov.ansible-role-rtags, rtags_version: "v2.20", llvm_version: 4.0, gcc_version: 4.9.4, tags: ["rtags"] }
+    #- { role: RomanShestakov.ansible-role-irony, irony_version: "v1.2.0", llvm_version: 4.0, gcc_version: 4.9.4, tags: ["irony"] }
     # - { role: RomanShestakov.ansible-role-zmq, zmq_version: master, tags: ["zmq"] }
     # - { role: RomanShestakov.ansible-role-flatbuffers, fb_version: v1.7.1, tags: ["fb"] }
-    - { role: RomanShestakov.ansible-role-emacs, become: yes, emacs_version: "emacs-25.3", tags: ["emacs"] }
+    - { role: RomanShestakov.ansible-role-llvm, become: yes, version: release_80, gcc_version: 8.2.0, tags: ["llvm"] }
+    - { role: RomanShestakov.ansible-role-emacs, become: yes, emacs_version: "emacs-26.2", tags: ["emacs"] }
 
   post_tasks:
     - name: .EMACS | get .emacs git repository
