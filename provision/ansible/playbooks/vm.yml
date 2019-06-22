@@ -26,3 +26,9 @@
       become: yes
       become_user: vagrant
       git: repo={{ dot_emacs_repo_url }} dest="/home/vagrant/.emacs.d" accept_hostkey=yes
+
+    - name: CONDA | install extra package
+      shell: conda install -c conda-forge {{ item }}
+      with_items:
+        - epc
+        - python-language-server
