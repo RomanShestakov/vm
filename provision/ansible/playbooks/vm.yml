@@ -13,10 +13,8 @@
       command: authconfig --disablefingerprint --update
 
   roles:
-    - { role: geerlingguy.git, become: yes, workspace: /root, git_install_from_source: true, git_version: "2.16.2", tags: ["git"] }
     - { role: RomanShestakov.ansible-role-dotfiles, dotfiles_dest: "/home/vagrant" }
     - { role: RomanShestakov.ansible-role-tmux, become: yes, tags: ["tmux"] }
-    - { role: RomanShestakov.ansible-role-llvm, become: yes, version: release_80, gcc_version: 8.2.0, tags: ["llvm"] }
     - { role: RomanShestakov.ansible-role-emacs, become: yes, emacs_version: "emacs-26.2", tags: ["emacs"] }
 
   post_tasks:
