@@ -20,8 +20,8 @@
 #   #version: "v1.1.0"
 #   name: RomanShestakov.erlang
 
-# - src: git+https://github.com/RomanShestakov/ansible-role-miniconda.git
-#   name: RomanShestakov.miniconda
+- src: git+https://github.com/RomanShestakov/ansible-role-miniconda.git
+  name: RomanShestakov.miniconda
 
 - src: git+https://github.com/RomanShestakov/ansible-role-emacs.git
   name: RomanShestakov.ansible-role-emacs
