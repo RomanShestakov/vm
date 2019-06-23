@@ -28,7 +28,7 @@
       git: repo={{ dot_emacs_repo_url }} dest="/home/vagrant/.emacs.d" accept_hostkey=yes
 
     - name: CONDA | install extra package
-      command: /opt/anaconda/bin/conda install -c conda-forge {{ item }}
+      command: /opt/anaconda/bin/conda install -y -c conda-forge {{ item }}
       with_items:
         - epc
         - python-language-server
