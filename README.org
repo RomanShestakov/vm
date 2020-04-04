@@ -5,15 +5,49 @@
 * Description
 
 A Vagrant VM provisioned with ansible. This VM uses standard centos.
-Used to test code examples from Advanced Programming in Unix
 
+* Intall Virtualbox
+https://www.virtualbox.org/wiki/Downloads
 
+* Install Ansible
+#+BEGIN_SRC
+$ brew install ansible
+#+END_SRC
 
-http://pythondata.com/jupyter-vagrant/
-jupyter notebook --ip=0.0.0.0
-http://0.0.0.0:8888/tree
+* Install Packer
+#+BEGIN_SRC
+$ brew install packer
+#+END_SRC
 
+* Install Vagrant
+#+BEGIN_SRC
+https://www.vagrantup.com/downloads.html
+#+END_SRC
+
+* Install Vagrant plugin for 'Guest Additions'
+#+BEGIN_SRC
+vagrant plugin install vagrant-vbguest vagrant destroy && vagrant up
+#+END_SRC
+
+in case of error:
+‘vagrant up’ fails with ‘mount: unknown filesystem type ‘vboxsf”
+need to reinstall vagrant plugin:
+
+#+BEGIN_SRC
+vagrant plugin install vagrant-vbguest
+#+END_SRC
+
+* Build virtualbox centos image
+#+BEGIN_SRC
+# build centos7 image:
+packer build --only=virtualbox-iso provision/centos7.json
+# copy created box to vagrant
+vagrant box add virtualbox-centos7 builds/virtualbox-centos7.box --force
+#+END_SRC
+
+* Build vagrant image
+#+BEGIN_SRC
+# startup vagrant
 vagrant up
-## ssh to one of the hosts:
-vagrant ssh vagrant1
-vagrant ssh vagrant2
+vagrant ssh
+#+END_SRC
