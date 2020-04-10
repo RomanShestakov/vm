@@ -16,10 +16,10 @@
     - { role: RomanShestakov.ansible-role-dotfiles, dotfiles_dest: "/home/vagrant" }
     - { role: RomanShestakov.ansible-role-tmux, become: yes, tags: ["tmux"] }
     - { role: RomanShestakov.ansible-role-emacs, become: yes, emacs_version: "emacs-26.2", tags: ["emacs"] }
-    - { role:
-      RomanShestakov.miniconda,
-      miniconda_home: "/opt/anaconda",
-      url: 'https://repo.continuum.io/archive/Anaconda3-2019.03-Linux-x86_64.sh'}
+    # - { role:
+    #   RomanShestakov.miniconda,
+    #   miniconda_home: "/opt/anaconda",
+    #   url: 'https://repo.continuum.io/archive/Anaconda3-2019.03-Linux-x86_64.sh'}
 
   post_tasks:
     - name: .EMACS | get .emacs git repository
@@ -27,8 +27,8 @@
       become_user: vagrant
       git: repo={{ dot_emacs_repo_url }} dest="/home/vagrant/.emacs.d" accept_hostkey=yes
 
-    - name: CONDA | install extra package
-      command: /opt/anaconda/bin/conda install -y -c conda-forge {{ item }}
-      with_items:
-        - epc
-        - python-language-server
+    # - name: CONDA | install extra package
+    #   command: /opt/anaconda/bin/conda install -y -c conda-forge {{ item }}
+    #   with_items:
+    #     - epc
+    #     - python-language-server
