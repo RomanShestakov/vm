@@ -51,3 +51,9 @@ vagrant box add virtualbox-centos7 builds/virtualbox-centos7.box --force
 vagrant up
 vagrant ssh
 #+END_SRC
+* How to update to latest git
+#+BEGIN_SRC
+sudo yum remove git
+sudo yum -y install  https://centos7.iuscommunity.org/ius-release.rpm
+sudo yum -y install  git2u-all
+#+END_SRC
