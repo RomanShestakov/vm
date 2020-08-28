@@ -4,7 +4,7 @@
   become: yes
   sysctl:
     name: kernel.core_pattern
-    value: /tmp/cores/core.%e.%p.%h.%
+    value: "/tmp/cores/core.%e.%p.%h.%"
     state: present
     reload: yes
 
