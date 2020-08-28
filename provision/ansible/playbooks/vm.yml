@@ -22,3 +22,11 @@
       become: yes
       become_user: vagrant
       git: repo={{ dot_emacs_repo_url }} dest="/home/vagrant/.emacs.d" accept_hostkey=yes
+
+    - name: Set kernel.core_pattern in sysctl
+      become: yes
+      sysctl:
+        name: kernel.core_pattern
+        value: "/tmp/cores/core.%e.%p.%h.%"
+        state: present
+        reload: yes
