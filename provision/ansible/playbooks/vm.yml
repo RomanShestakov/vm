@@ -21,7 +21,7 @@
     - name: .EMACS | get .emacs git repository
       become: yes
       become_user: vagrant
-      git: repo={{ dot_emacs_repo_url }} dest="/home/vagrant/.emacs.d" accept_hostkey=yes
+      git: repo={{ dot_emacs_repo_url }} dest="/home/vagrant/.emacs.d" accept_hostkey=yes force=yes
 
     - name: Set kernel.core_pattern in sysctl
       become: yes
