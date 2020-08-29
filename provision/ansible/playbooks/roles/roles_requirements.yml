@@ -1,8 +1,5 @@
 # roles_requirements.yml
 
-# from galaxy
-# - src: yatesr.timezone
-
 - src: git+https://github.com/geerlingguy/ansible-role-git.git
   version: "2.1.0"
   name: geerlingguy.git
@@ -11,14 +8,6 @@
 - src: git+https://github.com/ANXS/build-essential.git
   #version: "v1.0.1"
   name: ANXS.build-essential
-
-# - src: git+https://github.com/ANXS/python.git
-#   version: "v1.0.1"
-#   name: ANXS.python
-
-# - src: git+https://github.com/RomanShestakov/erlang.git
-#   #version: "v1.1.0"
-#   name: RomanShestakov.erlang
 
 - src: git+https://github.com/RomanShestakov/ansible-role-miniconda.git
   name: RomanShestakov.miniconda
@@ -32,23 +21,8 @@
 - src: git+https://github.com/RomanShestakov/ansible-role-dotfiles.git
   name: RomanShestakov.ansible-role-dotfiles
 
-# - src: git+https://github.com/RomanShestakov/ansible-role-conda-packages
-#   name: RomanShestakov.ansible-role-conda-packages
-
-# - src: git+https://github.com/knopki/ansible-locale.git
-#   name: knopki.locale
-
-# - src: git+https://github.com/Stouts/Stouts.timezone.git
-#   name: Stouts.timezone
-
-# - src: git+https://github.com/Stouts/Stouts.hostname.git
-#   name: Stouts.hostname
-
 - src: git+https://github.com/RomanShestakov/ansible-role-cmake.git
   name: RomanShestakov.ansible-role-cmake
-
-# - src: git+https://github.com/AlbanAndrieu/ansible-cmake.git
-#   name: alban.andrieu.cmake
 
 - src: git+https://github.com/RomanShestakov/ansible-role-llvm
   name: RomanShestakov.ansible-role-llvm
@@ -56,17 +30,8 @@
 - src: git+https://github.com/RomanShestakov/ansible-role-gcc.git
   name: RomanShestakov.ansible-role-gcc
 
-# - src: git+https://github.com/RomanShestakov/ansible-role-rtags.git
-#   name: RomanShestakov.ansible-role-rtags
-
 - src: git+https://github.com/RomanShestakov/ansible-role-common-tools.git
   name: RomanShestakov.ansible-role-common-tools
 
-# - src: git+https://github.com/RomanShestakov/ansible-role-zmq.git
-#   name: RomanShestakov.ansible-role-zmq
-
-# - src: git+https://github.com/RomanShestakov/ansible-role-flatbuffers.git
-#   name: RomanShestakov.ansible-role-flatbuffers
-
-# - src: git+https://github.com/RomanShestakov/ansible-role-irony.git
-#   name: RomanShestakov.ansible-role-irony
+- src: git+https://github.com/RomanShestakov/ansible-role-valgrind.git
+  name: RomanShestakov.ansible-role-valgrind
