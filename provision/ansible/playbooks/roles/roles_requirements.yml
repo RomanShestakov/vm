@@ -9,9 +9,6 @@
   #version: "v1.0.1"
   name: ANXS.build-essential
 
-- src: git+https://github.com/RomanShestakov/ansible-role-miniconda.git
-  name: RomanShestakov.miniconda
-
 - src: git+https://github.com/RomanShestakov/ansible-role-emacs.git
   name: RomanShestakov.ansible-role-emacs
 
@@ -35,3 +32,6 @@
 
 - src: git+https://github.com/RomanShestakov/ansible-role-valgrind.git
   name: RomanShestakov.ansible-role-valgrind
+
+- src: git+https://github.com/RomanShestakov/ansible-role-protobuf.git
+  name: RomanShestakov.ansible-role-protobuf
