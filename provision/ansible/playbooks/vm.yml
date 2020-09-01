@@ -30,7 +30,7 @@
       file:
         path: /tmp/cores
         state: directory
-        mode: '0755'
+        mode: '0777'
 
     - name: Set kernel.core_pattern in sysctl
       become: yes
