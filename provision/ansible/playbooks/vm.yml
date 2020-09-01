@@ -26,6 +26,12 @@
       become_user: vagrant
       git: repo={{ dot_emacs_repo_url }} dest="/home/vagrant/.emacs.d" accept_hostkey=yes force=yes
 
+    - name: Create a directory to write mem dumps, if it does not exist
+      file:
+        path: /tmp/cores
+        state: directory
+        mode: '0755'
+
     - name: Set kernel.core_pattern in sysctl
       become: yes
       sysctl:
