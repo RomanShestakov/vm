@@ -13,7 +13,7 @@
       command: authconfig --disablefingerprint --update
 
   roles:
-    - { role: RomanShestakov.ansible-role-dotfiles, dotfiles_dest: "/home/vagrant" }
+    - { role: RomanShestakov.ansible-role-dotfiles, dotfiles_repo_url: "https://github.com/RomanShestakov/dotfiles.git", dotfiles_dest: "/home/vagrant" }
     - { role: RomanShestakov.ansible-role-tmux, become: yes, tags: ["tmux"] }
     - { role: RomanShestakov.ansible-role-emacs, become: yes, emacs_version: "emacs-27.1", tags: ["emacs"] }
     - { role: RomanShestakov.ansible-role-valgrind, become: yes, tags: ["valgrind"] }
@@ -24,7 +24,7 @@
     - name: .EMACS | get .emacs git repository
       become: yes
       become_user: vagrant
-      git: repo={{ dot_emacs_repo_url }} dest="/home/vagrant/.emacs.d" accept_hostkey=yes force=yes
+      git: repo="https://github.com/RomanShestakov/.emacs.d.git" dest="/home/vagrant/.emacs.d" accept_hostkey=yes force=yes
 
     - name: Create a directory to write mem dumps, if it does not exist
       file:
