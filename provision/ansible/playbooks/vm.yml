@@ -18,7 +18,7 @@
     - { role: RomanShestakov.ansible-role-emacs, become: yes, emacs_version: "emacs-27.1", tags: ["emacs"] }
     - { role: RomanShestakov.ansible-role-valgrind, become: yes, tags: ["valgrind"] }
     - { role: RomanShestakov.ansible-role-protobuf, gcc_version: 8.2.0, become: yes, tags: ["protobuf"] }
-    #- { role: ansible-role-llvm, become: yes, version: llvmorg-12-init, gcc_version: 8.2.0, tags: ["llvm"] }
+    - { role: geerlingguy.java, become: yes, tags: ["java"] }
 
   post_tasks:
     - name: .EMACS | get .emacs git repository
