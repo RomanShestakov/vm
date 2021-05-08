@@ -39,3 +39,6 @@
 
 - src: git+https://github.com/RomanShestakov/ansible-role-protobuf.git
   name: RomanShestakov.ansible-role-protobuf
+
+- src: git+https://github.com/RomanShestakov/ansible-role-antrl.git
+  name: RomanShestakov.ansible-role-antrl

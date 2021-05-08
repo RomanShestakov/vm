@@ -18,7 +18,16 @@
     - { role: RomanShestakov.ansible-role-emacs, become: yes, emacs_version: "emacs-27.1", tags: ["emacs"] }
     - { role: RomanShestakov.ansible-role-valgrind, become: yes, tags: ["valgrind"] }
     - { role: RomanShestakov.ansible-role-protobuf, gcc_version: 8.2.0, become: yes, tags: ["protobuf"] }
-    - { role: geerlingguy.java, become: yes, tags: ["java"] }
+    - { role: RomanShestakov.ansible-role-antrl, tags: ["antrl"] }
+    # - { role: geerlingguy.java, become: yes, tags: ["java"] }
+    - { role: RomanShestakov.ansible-role-common-tools, become: yes, tags: ["build-common"] }
+    - role: geerlingguy.java
+      become: yes
+      # when: "ansible_of_family == 'RedHat'"
+      java_home: "/opt/java"
+      java_packages:
+        - java-1.8.0-openjdk
+        - java-1.8.0-openjdk-devel
 
   post_tasks:
     - name: .EMACS | get .emacs git repository
