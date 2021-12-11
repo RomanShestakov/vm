@@ -20,7 +20,7 @@
     - { role: RomanShestakov.ansible-role-protobuf, gcc_version: 8.2.0, become: yes, tags: ["protobuf"] }
     - { role: RomanShestakov.ansible-role-antrl, tags: ["antrl"] }
     # - { role: geerlingguy.java, become: yes, tags: ["java"] }
-    - { role: RomanShestakov.ansible-role-common-tools, become: yes, tags: ["build-common"] }
+    # - { role: RomanShestakov.ansible-role-common-tools, become: yes, tags: ["build-common"] }
     - role: geerlingguy.java
       become: yes
       # when: "ansible_of_family == 'RedHat'"
