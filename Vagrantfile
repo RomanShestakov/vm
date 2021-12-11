@@ -25,7 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "vagrant1" do |vagrant1|
     vagrant1.vm.box = "virtualbox-centos7"
     vagrant1.vm.host_name = "base1.local"
-    vagrant1.vm.network :private_network, ip: "192.168.111.222"
+    vagrant1.vm.network :private_network, ip: "192.168.56.2"
     vagrant1.vm.network "forwarded_port", guest: 80, host: 8080
     vagrant1.vm.network "forwarded_port", guest: 8888, host: 8888
     vagrant1.vm.network "forwarded_port", id: "ssh", guest: 22, host: 2222
