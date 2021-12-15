@@ -2,6 +2,7 @@
 # base.yml - play to install a VM
 - name: base.yml
   hosts: all
+
   roles:
     - { role:
       geerlingguy.git,
@@ -13,7 +14,8 @@
       tags: ["git"] }
     - { role: ANXS.build-essential, become: yes, tags: ["build-essensial"] }
     - { role: RomanShestakov.ansible-role-common-tools, become: yes, tags: ["build-common"] }
-    - { role: RomanShestakov.ansible-role-cmake, cmake_version: 3.8, cmake_minor_version: 2, tags: ["cmake"] }
+    - { role: RomanShestakov.ansible-role-cmake, cmake_version: 3.22.1, tags: ["cmake"] }
     - { role: RomanShestakov.ansible-role-gcc, gcc_version: 8.2.0, binutils_version: 2.31, gdb_version: 8.2, tags: ["gcc"] }
-    # - { role: RomanShestakov.ansible-role-llvm, become: yes, version: llvmorg-12-init, gcc_version: 8.2.0, tags: ["llvm"] }
+    - { role: RomanShestakov.ansible-role-llvm, become: yes, version: llvmorg-12-init, gcc_version: 8.2.0, tags: ["llvm"] }
+
 ...
