@@ -13,7 +13,9 @@ archive this is to use Docker as VirtualBox hypervisor doesn't work
 for M1.
 
 * Intall Docker Desktop
-https://www.docker.com/products/docker-desktop
+
+I tested with v.3.6.0
+https://docs.docker.com/desktop/mac/release-notes/3.x/
 
 * Install Ansible
 #+BEGIN_SRC
