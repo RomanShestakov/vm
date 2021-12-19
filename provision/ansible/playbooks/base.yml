@@ -3,26 +3,79 @@
 - name: base.yml
   hosts: all
 
+  # pre_tasks:
+  #   - name: Ensure the locale exists
+  #     locale_gen:
+  #       name: en_US.UTF-8
+  #       state: present
+  #   - name: set as default locale
+  #     command: localectl set-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+
   roles:
-    - { role:
-      geerlingguy.git,
-      become: yes,
-      git_install_from_source: true,
-      git_install_path: "/usr",
-      git_install_from_source_force_update: true,
-      git_version: "2.22.0",
-      tags: ["git"] }
-    - { role: ANXS.build-essential, become: yes, tags: ["build-essensial"] }
-    - { role: RomanShestakov.ansible-role-common-tools, become: yes, tags: ["build-common"] }
-    - { role: RomanShestakov.ansible-role-cmake, cmake_version: 3.22.1, tags: ["cmake"] }
-    - { role: RomanShestakov.ansible-role-gcc, gcc_version: 8.2.0, binutils_version: 2.31, gdb_version: 8.2, tags: ["gcc"] }
-    - { role: RomanShestakov.ansible-role-llvm, become: yes, version: llvmorg-12-init, gcc_version: 8.2.0, tags: ["llvm"] }
-    - { role: RomanShestakov.ansible-role-dotfiles, dotfiles_repo_url: "https://github.com/RomanShestakov/dotfiles.git", dotfiles_dest: "/home/vagrant" }
-    - { role: RomanShestakov.ansible-role-tmux, become: yes, tags: ["tmux"] }
-    - { role: RomanShestakov.ansible-role-emacs, become: yes, emacs_version: "emacs-27.1", tags: ["emacs"] }
-    - { role: RomanShestakov.ansible-role-valgrind, become: yes, tags: ["valgrind"] }
-    - { role: RomanShestakov.ansible-role-protobuf, gcc_version: 8.2.0, become: yes, tags: ["protobuf"] }
-    - { role: RomanShestakov.ansible-role-antrl, tags: ["antrl"] }
+    - role: RomanShestakov.ansible-environment
+      become: yes
+      vars:
+        environment_config:
+          LANG: en_US.UTF-8
+          LC_ALL: en_US.UTF-8
+
+    - role: geerlingguy.git
+      become: yes
+      git_install_from_source: true
+      git_install_path: "/usr"
+      git_install_from_source_force_update: true
+      git_version: "2.22.0"
+      tags: ["git"]
+
+    - role: ANXS.build-essential
+      become: yes
+      tags: ["build-essensial"]
+
+    - role: RomanShestakov.ansible-role-common-tools
+      become: yes
+      tags: ["build-common"]
+
+    - role: RomanShestakov.ansible-role-cmake
+      cmake_version: 3.22.1
+      tags: ["cmake"]
+
+    - role: RomanShestakov.ansible-role-gcc
+      gcc_version: 8.2.0
+      binutils_version: 2.31
+      gdb_version: 8.2
+      tags: ["gcc"]
+
+    - role: RomanShestakov.ansible-role-llvm
+      become: yes
+      version: llvmorg-12-init
+      gcc_version: 8.2.0
+      tags: ["llvm"]
+
+    - role: RomanShestakov.ansible-role-dotfiles
+      dotfiles_repo_url: "https://github.com/RomanShestakov/dotfiles.git"
+      dotfiles_dest: "/home/vagrant"
+
+    - role: RomanShestakov.ansible-role-tmux
+      become: yes
+      tags: ["tmux"]
+
+    - role: RomanShestakov.ansible-role-emacs
+      become: yes
+      emacs_version: "emacs-27.1"
+      tags: ["emacs"]
+
+    - role: RomanShestakov.ansible-role-valgrind
+      become: yes
+      tags: ["valgrind"]
+
+    - role: RomanShestakov.ansible-role-protobuf
+      gcc_version: 8.2.0
+      become: yes
+      tags: ["protobuf"]
+
+    - role: RomanShestakov.ansible-role-antrl
+      tags: ["antrl"]
+
     - role: geerlingguy.java
       become: yes
       java_home: "/opt/java"

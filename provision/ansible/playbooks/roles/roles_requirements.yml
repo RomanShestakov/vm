@@ -13,6 +13,10 @@
   #version: "v1.0.1"
   name: ANXS.build-essential
 
+# clones role to update /etc/environment
+- src: git+https://github.com/RomanShestakov/ansible-environment
+  name: RomanShestakov.ansible-environment
+
 - src: git+https://github.com/RomanShestakov/ansible-role-emacs.git
   name: RomanShestakov.ansible-role-emacs
 
