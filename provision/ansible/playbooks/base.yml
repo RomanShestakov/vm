@@ -83,6 +83,14 @@
         - java-1.8.0-openjdk
         - java-1.8.0-openjdk-devel
 
+    - role: diodonfrost.ansible-role-python
+      vars:
+        python_version: 3.7.6
+        make_num_threads: 2
+        python_path: "/opt/python"
+      tags: ["python"]
+
+
   post_tasks:
     - name: .EMACS | get .emacs git repository
       become: yes
