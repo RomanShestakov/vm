@@ -87,7 +87,7 @@
       vars:
         python_version: 3.7.6
         make_num_threads: 2
-        python_path: "/opt/python-3.7.6"
+        python_path: "/opt/python{{ python_version[:3] }}"
       tags: ["python"]
 
 
