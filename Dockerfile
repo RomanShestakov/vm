@@ -8,7 +8,7 @@ MAINTAINER Matthew Warman <mcwarman@gmail.com>
 # Fix locale issue
 # https://blog.nashcom.de/nashcomblog.nsf/dx/locale-issue-on-linux-centos-rhel.htm
 RUN sed '/override_install_langs=en_US.UTF/d' /etc/yum.conf
-RUN yum -y reinstall glibc-commo
+RUN yum -y reinstall glibc-common
 
 RUN yum -y update; yum clean all && \
     yum -y install openssh-server openssh-clients passwd sudo; yum clean all
