@@ -23,7 +23,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     d.privileged = true
     d.create_args = ["-v", "/sys/fs/cgroup:/sys/fs/cgroup:ro"]
     # configure docker container
-    d.create_args = ['--cpuset-cpus=4']
+    d.create_args = ['--cpuset-cpus=2']
     d.create_args = ['--memory=6g']
   end
 
