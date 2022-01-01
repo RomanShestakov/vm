@@ -106,6 +106,10 @@
       shell:
         cmd: /opt/python{{ python_version[:3] }}/bin/python3.9 -m pip install -r /home/vagrant/requirements.txt --user
 
+    - name: PythonEnv | add path .local/bin to /etc/profile.d/python_path.sh
+      become: true
+      action: template src=python_path.sh.j2 dest="/etc/profile.d/python_path.sh" mode=0644
+
     - name: .EMACS | get .emacs git repository
       become: yes
       become_user: vagrant
