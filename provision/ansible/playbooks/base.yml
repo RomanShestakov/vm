@@ -85,8 +85,8 @@
 
     - role: diodonfrost.ansible-role-python
       vars:
-        python_version: 3.7.6
-        make_num_threads: 2
+        python_version: 3.9.8
+        make_num_threads: 1
         python_path: "/opt/python{{ python_version[:3] }}"
       tags: ["python"]
 
