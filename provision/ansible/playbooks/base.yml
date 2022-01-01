@@ -95,12 +95,14 @@
 
     - name: PythonEnv | copy requirements.txt
       become: yes
+      become_user: vagrant
       ansible.builtin.copy:
         src: requirements.txt
         dest: /home/vagrant
 
     - name: PythonEnv | Venv setup
       become: yes
+      become_user: vagrant
       shell:
         cmd: /opt/python{{ python_version[:3] }}/bin/python3.9 -m pip install -r /home/vagrant/requirements.txt --user
 
