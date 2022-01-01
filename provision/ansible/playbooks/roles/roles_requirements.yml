@@ -48,4 +48,4 @@
   name: RomanShestakov.ansible-role-antrl
 
 - src: git+https://github.com/RomanShestakov/ansible-role-python
-  name: diodonfrost.ansible-role-python
+  name: RomanShestakov.ansible-role-python

@@ -83,7 +83,7 @@
         - java-1.8.0-openjdk
         - java-1.8.0-openjdk-devel
 
-    - role: diodonfrost.ansible-role-python
+    - role: RomanShestakov.ansible-role-python
       vars:
         python_version: 3.9.8
         make_num_threads: 1
