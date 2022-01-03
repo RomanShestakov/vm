@@ -14,6 +14,8 @@ for M1.
 
 * Intall Docker Desktop
 
+As the vagrant need a provider - install Docker on the host computer first.
+
 I tested with v.3.6.0
 https://docs.docker.com/desktop/mac/release-notes/3.x/
 
@@ -33,7 +35,7 @@ The build might take few hours as ansible roles will build gcc, llvm, etc from s
 vagrant up
 #+END_SRC
 
-* Use vagrant
+* SSH to the vagrant VM
 #+BEGIN_SRC
 vagrant ssh
 #+END_SRC
