@@ -3,14 +3,6 @@
 - name: base.yml
   hosts: all
 
-  # pre_tasks:
-  #   - name: Ensure the locale exists
-  #     locale_gen:
-  #       name: en_US.UTF-8
-  #       state: present
-  #   - name: set as default locale
-  #     command: localectl set-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
-
   roles:
     - role: RomanShestakov.ansible-environment
       become: yes

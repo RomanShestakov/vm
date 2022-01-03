@@ -39,3 +39,24 @@ vagrant up
 #+BEGIN_SRC
 vagrant ssh
 #+END_SRC
+
+* Some things to notice
+  ** How external ansible roles are applied
+  As part of the VM provision Vagrant will execute ansible role to apply certain configurations.
+  This is triggered by the following line in the Vagrantfile
+  #+BEGIN_SRC
+      ansible.playbook = 'provision/ansible/playbooks/base.yml'
+  #+END_SRC
+
+  Vagrant also executes the following snippet which run role_update.sh script
+  which pulls from hithub all the required by the base.yml ansible roles.
+  #+BEGIN_SRC
+  system("
+    if [ #{ARGV[0]} = 'up' ]; then
+        echo 'You are doing vagrant up and can execute your script'
+        ./provision/scripts/role_update.sh
+    fi
+    ")
+  #+END_SRC
+
+  The list of the roles is defined in the vm/provision/ansible/playbooks/roles/roles_requirements.yml
