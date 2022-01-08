@@ -49,3 +49,6 @@
 
 - src: git+https://github.com/RomanShestakov/ansible-role-python
   name: RomanShestakov.ansible-role-python
+
+- src: git+https://github.com/RomanShestakov/ansible-role-erlang
+  name: RomanShestakov.ansible-role-erlang

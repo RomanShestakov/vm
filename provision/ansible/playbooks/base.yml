@@ -82,6 +82,10 @@
         python_path: "/opt/python{{ python_version[:3] }}"
       tags: ["python"]
 
+    - role: RomanShestakov.ansible-role-erlang
+      become: yes
+      erlang_version: "24.1"
+      tags: ["erlang"]
 
   post_tasks:
 
