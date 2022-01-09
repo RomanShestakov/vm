@@ -82,10 +82,17 @@
         python_path: "/opt/python{{ python_version[:3] }}"
       tags: ["python"]
 
-    - role: RomanShestakov.ansible-role-erlang
+    - role: RomanShestakov.ansible-role-otp
       become: yes
       erlang_version: "24.1"
+      otp_install_dir: "/opt/otp-{{otp_version}}"
       tags: ["erlang"]
+
+    - role: RomanShestakov.ansible-role-erlang-packages
+      become: yes
+      rebar3_version: "3.18.0"
+      otp_install_dir: "/opt/otp-{{otp_version}}"
+      tags: ["erlang-packages"]
 
   post_tasks:
 
