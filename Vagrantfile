@@ -21,12 +21,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     d.build_dir = "."
     d.has_ssh = true
     d.privileged = true
-    d.create_args = ["-v", "/sys/fs/cgroup:/sys/fs/cgroup:rw"]
+    d.volumes = ["/sys/fs/cgroup:/sys/fs/cgroup:rw"]
     # configure docker container
-    d.create_args = ['--cpuset-cpus=2']
-    d.create_args = ['--memory=4g']
-    d.create_args = ['--cgroupns=host']
-
+    d.create_args = [ '--cgroupns=host', '--cpuset-cpus=2', '--memory=4g' ]
   end
 
   # sync folders
