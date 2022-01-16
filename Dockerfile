@@ -1,8 +1,8 @@
 # Modified by Matthew Warman <mcwarman@gmail.com>
 # Based on project with in CenOs/CentOS-Dockerfiles
-# https://github.com/CentOS/CentOS-Dockerfiles/tree/master/systemd/centos7
+# https://github.com/CentOS/CentOS-Dockerfiles/tree/master/systemd/centos8
 
-FROM centos:centos7
+FROM centos:centos8
 MAINTAINER Matthew Warman <mcwarman@gmail.com>
 
 # Fix locale issue
