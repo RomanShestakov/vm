@@ -91,11 +91,13 @@
 
     - role: RomanShestakov.ansible-role-erlang-packages
       become: yes
+      become_user: vagrant
       # otp_version: "24.1"
       otp_version: "maint"
       rebar3_version: "3.18.0"
       erlang_ls_version: "0.21.2"
       otp_install_dir: "/opt/otp-{{otp_version}}"
+      user_home: "/home/vagrant"
       tags: ["erlang-packages"]
 
   post_tasks:
