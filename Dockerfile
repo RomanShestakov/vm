@@ -1,9 +1,13 @@
-# Modified by Matthew Warman <mcwarman@gmail.com>
-# Based on project with in CenOs/CentOS-Dockerfiles
-# https://github.com/CentOS/CentOS-Dockerfiles/tree/master/systemd/centos8
+ARG TAG=stream
+FROM quay.io/centos/centos:$TAG
 
-FROM centos:centos8
-MAINTAINER Matthew Warman <mcwarman@gmail.com>
+# upgrade packages
+RUN dnf upgrade --setopt=install_weak_deps=False -y && \
+    dnf clean all && \
+    rm -rf /tmp/* && \
+    rm -rf /var/cache/yum && \
+    rm -rf /var/cache/dnf && \
+    find /var/log -type f -name '*.log' -delete
 
 # # Fix locale issue
 # # https://blog.nashcom.de/nashcomblog.nsf/dx/locale-issue-on-linux-centos-rhel.htm

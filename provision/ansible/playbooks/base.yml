@@ -47,9 +47,9 @@
       dotfiles_repo_url: "https://github.com/RomanShestakov/dotfiles.git"
       dotfiles_dest: "/home/vagrant"
 
-    - role: RomanShestakov.ansible-role-tmux
-      become: yes
-      tags: ["tmux"]
+    # - role: RomanShestakov.ansible-role-tmux
+    #   become: yes
+    #   tags: ["tmux"]
 
     - role: RomanShestakov.ansible-role-emacs
       become: yes
