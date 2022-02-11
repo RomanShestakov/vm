@@ -17,14 +17,17 @@ system("
 ")
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.provider "docker" do |d|
-    d.build_dir = "."
-    d.has_ssh = true
-    d.privileged = true
-    d.volumes = ["/sys/fs/cgroup:/sys/fs/cgroup:rw"]
+  config.vm.provider "docker" do |docker|
+    docker.build_dir = "."
+    docker.has_ssh = true
+    docker.privileged = true
+    docker.volumes = ["/sys/fs/cgroup:/sys/fs/cgroup:rw"]
     # configure docker container
-    d.create_args = [ '--cgroupns=host', '--cpuset-cpus=2', '--memory=4g' ]
+    docker.create_args = [ '--cgroupns=host', '--cpuset-cpus=2', '--memory=4g' ]
+    #docker.vm.network "forwarded_port", guest: 80, host: 8080
   end
+
+#  config.vm.network :public_network, type: "dhcp", bridge: "eth0"
 
   # sync folders
   config.vm.synced_folder "/Users/romanshestakov/development", "/home/vagrant/development"
