@@ -27,7 +27,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     #docker.vm.network "forwarded_port", guest: 80, host: 8080
   end
 
-#  config.vm.network :public_network, type: "dhcp", bridge: "eth0"
+  #config.vm.network :public_network, type: "dhcp", bridge: "eth0"
+  config.vm.network :forwarded_port, guest: 8000, host: 8000
 
   # sync folders
   config.vm.synced_folder "/Users/romanshestakov/development", "/home/vagrant/development"
