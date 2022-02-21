@@ -24,13 +24,23 @@ https://docs.docker.com/desktop/mac/release-notes/#docker-desktop-442
 $ brew install ansible
 #+END_SRC
 
+* Install Packer
+#+BEGIN_SRC
+$ brew install packer
+#+END_SRC
+
 * Install Vagrant
 #+BEGIN_SRC
 https://www.vagrantup.com/downloads.html
 #+END_SRC
 
-* Build vagrant image
+* Build with packer Docker image
 The build might take few hours as ansible roles will build gcc, llvm, etc from sources
+#+BEGIN_SRC
+packer build provision/centos7.json
+#+END_SRC
+
+* Build vagrant image based on Docker image
 #+BEGIN_SRC
 vagrant up
 #+END_SRC
