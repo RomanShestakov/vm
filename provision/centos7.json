@@ -18,10 +18,6 @@
           "playbook_dir": "provision/ansible/playbooks",
           "playbook_file": "provision/ansible/playbooks/base.yml",
           "role_paths": ["provision/ansible/playbooks/roles/external"]
-      },
-      {
-          "type": "shell",
-          "script": "provision/scripts/centos7/cleanup.sh"
       }
   ],
   "post-processors": [
