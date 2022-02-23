@@ -4,27 +4,35 @@
             "name": "docker",
             "type": "docker",
             "image": "quay.io/centos/centos:stream",
-            "commit": true
+            "commit": true,
+            "changes": [
+                "EXPOSE 22",
+                "ENTRYPOINT /usr/sbin/init"
+            ]
         }
     ],
 
-  "provisioners": [
-      {
-          "type": "shell",
-          "script": "provision/scripts/centos7/ansible.sh"
-      },
-      {
-          "type": "ansible-local",
-          "playbook_dir": "provision/ansible/playbooks",
-          "playbook_file": "provision/ansible/playbooks/base.yml",
-          "role_paths": ["provision/ansible/playbooks/roles/external"]
-      }
+    "provisioners": [
+        {
+            "type": "shell",
+            "script": "provision/scripts/vagrant_prereqs.sh"
+        },
+        {
+            "type": "shell",
+            "script": "provision/scripts/centos7/ansible.sh"
+        },
+        {
+            "type": "ansible-local",
+            "playbook_dir": "provision/ansible/playbooks",
+            "playbook_file": "provision/ansible/playbooks/base.yml",
+            "role_paths": ["provision/ansible/playbooks/roles/external"]
+        }
   ],
   "post-processors": [
       {
           "type": "docker-tag",
-          "repository": "rshestakov",
-          "tag": "1.0"
+          "repository": "vm",
+          "tag": "2.0"
       }
   ]
 }
