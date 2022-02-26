@@ -8,10 +8,10 @@
             "changes": [
                 "EXPOSE 22",
                 "ENTRYPOINT /usr/sbin/init"
-            ]
+            ],
+            "privileged": true
         }
     ],
-
     "provisioners": [
         {
             "type": "shell",

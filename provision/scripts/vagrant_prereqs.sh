@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# https://github.com/hashicorp/vagrant/issues/11177
 # Install dependencies for vagrant
 yum -y install openssh-server
 yum -y install openssh-clients
