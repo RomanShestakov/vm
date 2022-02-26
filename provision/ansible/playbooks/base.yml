@@ -35,21 +35,23 @@
       gcc_version: 8.2.0
       binutils_version: 2.31
       gdb_version: 8.2
+      gcc_number_build_jobs: 4
       tags: ["gcc"]
 
     - role: RomanShestakov.ansible-role-llvm
       become: yes
       version: llvmorg-12-init
       gcc_version: 8.2.0
+      llvm_number_build_jobs: 4
       tags: ["llvm"]
 
     - role: RomanShestakov.ansible-role-dotfiles
       dotfiles_repo_url: "https://github.com/RomanShestakov/dotfiles.git"
       dotfiles_dest: "/home/vagrant"
 
-    # - role: RomanShestakov.ansible-role-tmux
-    #   become: yes
-    #   tags: ["tmux"]
+    - role: RomanShestakov.ansible-role-tmux
+      become: yes
+      tags: ["tmux"]
 
     - role: RomanShestakov.ansible-role-emacs
       become: yes
@@ -103,26 +105,25 @@
   post_tasks:
 
     - name: PythonEnv | copy requirements.txt
-      become: yes
-      become_user: vagrant
       ansible.builtin.copy:
         src: requirements.txt
-        dest: /home/vagrant
+        dest: /opt/
 
     - name: PythonEnv | Venv setup
-      become: yes
-      become_user: vagrant
       shell:
-        cmd: /opt/python{{ python_version[:3] }}/bin/python3.9 -m pip install -r /home/vagrant/requirements.txt --user
+        cmd: /opt/python{{ python_version[:3] }}/bin/python3.9 -m pip install -r /opt/requirements.txt --user
 
     - name: PythonEnv | add path .local/bin to /etc/profile.d/python_path.sh
-      become: true
       action: template src=python_path.sh.j2 dest="/etc/profile.d/python_path.sh" mode=0644
 
     - name: .EMACS | get .emacs git repository
       become: yes
       become_user: vagrant
-      git: repo="https://github.com/RomanShestakov/.emacs.d.git" dest="/home/vagrant/.emacs.d" accept_hostkey=yes force=yes
+      ansible.builtin.git:
+        repo: "https://github.com/RomanShestakov/.emacs.d.git"
+        dest: "/home/vagrant/.emacs.d"
+        accept_hostkey: yes
+        force: yes
 
     - name: Create a directory to write mem dumps, if it does not exist
       file:
@@ -131,7 +132,6 @@
         mode: '0777'
 
     - name: Set kernel.core_pattern in sysctl
-      become: yes
       sysctl:
         name: kernel.core_pattern
         value: "/tmp/cores/core.%e.%p.%h.%"

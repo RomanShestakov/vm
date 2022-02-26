@@ -50,6 +50,12 @@ vagrant up
 vagrant ssh
 #+END_SRC
 
+* SSH to the vagrant VM
+#+BEGIN_SRC
+vagrant ssh-config
+ssh -o "StrictHostKeyChecking=no" -i .vagrant/machines/default/docker/private_key vagrant@localhost -p 2222
+#+END_SRC
+
 * Some things to notice
   ** How external ansible roles are applied
   As part of the VM provision Vagrant will execute ansible role to apply certain configurations.
