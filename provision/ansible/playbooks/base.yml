@@ -42,12 +42,12 @@
       become: yes
       version: llvmorg-12-init
       gcc_version: 8.2.0
-      llvm_number_build_jobs: 4
+      llvm_number_build_jobs: 1
       tags: ["llvm"]
 
-    - role: RomanShestakov.ansible-role-dotfiles
-      dotfiles_repo_url: "https://github.com/RomanShestakov/dotfiles.git"
-      dotfiles_dest: "/home/vagrant"
+    # - role: RomanShestakov.ansible-role-dotfiles
+    #   dotfiles_repo_url: "https://github.com/RomanShestakov/dotfiles.git"
+    #   dotfiles_dest: "/home/vagrant"
 
     - role: RomanShestakov.ansible-role-tmux
       become: yes
@@ -118,7 +118,7 @@
 
     - name: .EMACS | get .emacs git repository
       become: yes
-      become_user: vagrant
+      #become_user: vagrant
       ansible.builtin.git:
         repo: "https://github.com/RomanShestakov/.emacs.d.git"
         dest: "/home/vagrant/.emacs.d"
