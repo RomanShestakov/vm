@@ -19,30 +19,37 @@ system("
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider "docker" do |docker|
     # build using the image from the docker hub
-    # docker.image = "rshestakov/vagrant-docker"
+    docker.image = "vm:5.0"
     # build using local Dockerfile
-    docker.build_dir = "."
+    # docker.build_dir = "."
     docker.has_ssh = true
     docker.privileged = true
+    docker.remains_running = true
     docker.volumes = ["/sys/fs/cgroup:/sys/fs/cgroup:rw"]
     # configure docker container
     docker.create_args = [ '--cgroupns=host', '--cpuset-cpus=2', '--memory=4g' ]
   end
 
+  # don't insert new private key
+  config.ssh.insert_key = false
+
   #config.vm.network :public_network, type: "dhcp", bridge: "eth0"
   config.vm.network :forwarded_port, guest: 8000, host: 8000
   config.vm.network :forwarded_port, guest: 8001, host: 8001
 
+  # location of the private key
+  config.ssh.private_key_path = ['~/.vagrant.d/insecure_private_key']
+
   # sync folders
   config.vm.synced_folder "/Users/romanshestakov/development", "/home/vagrant/development"
 
-  # run ansible
-  config.vm.provision "ansible" do |ansible|
-    ansible.compatibility_mode="2.0"
-    ansible.sudo = true
-    ansible.verbose = "vvv"
-    #ansible.playbook = 'provision/ansible/playbooks/vm.yml'
-    ansible.playbook = 'provision/ansible/playbooks/base.yml'
-    ansible.host_key_checking = false
-  end
+  # # run ansible
+  # config.vm.provision "ansible" do |ansible|
+  #   ansible.compatibility_mode="2.0"
+  #   ansible.sudo = true
+  #   ansible.verbose = "vvv"
+  #   #ansible.playbook = 'provision/ansible/playbooks/vm.yml'
+  #   ansible.playbook = 'provision/ansible/playbooks/base.yml'
+  #   ansible.host_key_checking = false
+  # end
 end

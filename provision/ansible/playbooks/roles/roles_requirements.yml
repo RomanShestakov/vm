@@ -1,8 +1,8 @@
 # roles_requirements.yml
 
-- src: git+https://github.com/geerlingguy/ansible-role-git.git
-  name: geerlingguy.git
-  version: "2.1.0"
+# - src: git+https://github.com/geerlingguy/ansible-role-git.git
+#   name: geerlingguy.git
+#   version: "2.1.0"
 
 - src: git+https://github.com/geerlingguy/ansible-role-java.git
   version: "1.10.0"

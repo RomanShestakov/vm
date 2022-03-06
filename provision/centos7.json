@@ -32,7 +32,7 @@
       {
           "type": "docker-tag",
           "repository": "vm",
-          "tag": "2.0"
+          "tag": "5.0"
       }
   ]
 }

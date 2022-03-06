@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# # Fix locale issue
+# # https://blog.nashcom.de/nashcomblog.nsf/dx/locale-issue-on-linux-centos-rhel.htm
+sed '/override_install_langs=en_US.UTF/d' /etc/yum.conf
+yum -y install glibc-langpack-en glibc-langpack-de
+
 # https://github.com/hashicorp/vagrant/issues/11177
 # Install dependencies for vagrant
 yum -y install openssh-server
