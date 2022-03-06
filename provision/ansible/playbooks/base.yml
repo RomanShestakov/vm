@@ -19,95 +19,95 @@
       become: yes
       tags: ["build-common"]
 
-    # - role: RomanShestakov.ansible-role-cmake
-    #   cmake_version: 3.22.1
-    #   tags: ["cmake"]
+    - role: RomanShestakov.ansible-role-cmake
+      cmake_version: 3.22.1
+      tags: ["cmake"]
 
-    # - role: RomanShestakov.ansible-role-gcc
-    #   gcc_version: 8.2.0
-    #   binutils_version: 2.31
-    #   gdb_version: 8.2
-    #   gcc_number_build_jobs: 4
-    #   tags: ["gcc"]
+    - role: RomanShestakov.ansible-role-gcc
+      gcc_version: 8.2.0
+      binutils_version: 2.31
+      gdb_version: 8.2
+      gcc_number_build_jobs: 4
+      tags: ["gcc"]
 
-    # - role: RomanShestakov.ansible-role-llvm
-    #   become: yes
-    #   version: llvmorg-12-init
-    #   gcc_version: 8.2.0
-    #   llvm_number_build_jobs: 1
-    #   tags: ["llvm"]
+    - role: RomanShestakov.ansible-role-llvm
+      become: yes
+      version: llvmorg-12-init
+      gcc_version: 8.2.0
+      llvm_number_build_jobs: 1
+      tags: ["llvm"]
 
-    # - role: RomanShestakov.ansible-role-dotfiles
-    #   become: yes
-    #   become_user: vagrant
-    #   dotfiles_repo_url: "https://github.com/RomanShestakov/dotfiles.git"
-    #   dotfiles_dest: "/home/vagrant"
+    - role: RomanShestakov.ansible-role-dotfiles
+      become: yes
+      become_user: vagrant
+      dotfiles_repo_url: "https://github.com/RomanShestakov/dotfiles.git"
+      dotfiles_dest: "/home/vagrant"
 
-    # - role: RomanShestakov.ansible-role-tmux
-    #   become: yes
-    #   tags: ["tmux"]
+    - role: RomanShestakov.ansible-role-tmux
+      become: yes
+      tags: ["tmux"]
 
-    # - role: RomanShestakov.ansible-role-emacs
-    #   become: yes
-    #   emacs_version: "emacs-28"
-    #   tags: ["emacs"]
+    - role: RomanShestakov.ansible-role-emacs
+      become: yes
+      emacs_version: "emacs-28"
+      tags: ["emacs"]
 
-    # - role: RomanShestakov.ansible-role-valgrind
-    #   become: yes
-    #   tags: ["valgrind"]
+    - role: RomanShestakov.ansible-role-valgrind
+      become: yes
+      tags: ["valgrind"]
 
-    # - role: RomanShestakov.ansible-role-protobuf
-    #   gcc_version: 8.2.0
-    #   become: yes
-    #   tags: ["protobuf"]
+    - role: RomanShestakov.ansible-role-protobuf
+      gcc_version: 8.2.0
+      become: yes
+      tags: ["protobuf"]
 
-    # - role: RomanShestakov.ansible-role-antrl
-    #   tags: ["antrl"]
+    - role: RomanShestakov.ansible-role-antrl
+      tags: ["antrl"]
 
-    # - role: geerlingguy.java
-    #   become: yes
-    #   java_home: "/opt/java"
-    #   java_packages:
-    #     - java-1.8.0-openjdk
-    #     - java-1.8.0-openjdk-devel
+    - role: geerlingguy.java
+      become: yes
+      java_home: "/opt/java"
+      java_packages:
+        - java-1.8.0-openjdk
+        - java-1.8.0-openjdk-devel
 
-    # - role: RomanShestakov.ansible-role-python
-    #   vars:
-    #     python_version: 3.9.8
-    #     make_num_threads: 1
-    #     python_path: "/opt/python{{ python_version[:3] }}"
-    #   tags: ["python"]
+    - role: RomanShestakov.ansible-role-python
+      vars:
+        python_version: 3.9.8
+        make_num_threads: 1
+        python_path: "/opt/python{{ python_version[:3] }}"
+      tags: ["python"]
 
-    # - role: RomanShestakov.ansible-role-otp
-    #   become: yes
-    #   # otp_version: "24.1"
-    #   otp_version: "maint"
-    #   otp_install_dir: "/opt/otp-{{otp_version}}"
-    #   tags: ["erlang"]
+    - role: RomanShestakov.ansible-role-otp
+      become: yes
+      # otp_version: "24.1"
+      otp_version: "maint"
+      otp_install_dir: "/opt/otp-{{otp_version}}"
+      tags: ["erlang"]
 
-    # - role: RomanShestakov.ansible-role-erlang-packages
-    #   become: yes
-    #   # become_user: vagrant
-    #   # otp_version: "24.1"
-    #   otp_version: "maint"
-    #   rebar3_version: "3.18.0"
-    #   erlang_ls_version: "0.21.2"
-    #   otp_install_dir: "/opt/otp-{{otp_version}}"
-    #   local_user: "vagrant"
-    #   tags: ["erlang-packages"]
+    - role: RomanShestakov.ansible-role-erlang-packages
+      become: yes
+      # become_user: vagrant
+      # otp_version: "24.1"
+      otp_version: "maint"
+      rebar3_version: "3.18.0"
+      erlang_ls_version: "0.21.2"
+      otp_install_dir: "/opt/otp-{{otp_version}}"
+      local_user: "vagrant"
+      tags: ["erlang-packages"]
 
   post_tasks:
 
-    # - name: PythonEnv | copy requirements.txt
-    #   ansible.builtin.copy:
-    #     src: requirements.txt
-    #     dest: /opt/
+    - name: PythonEnv | copy requirements.txt
+      ansible.builtin.copy:
+        src: requirements.txt
+        dest: /opt/
 
-    # - name: PythonEnv | Venv setup
-    #   shell:
-    #     cmd: /opt/python{{ python_version[:3] }}/bin/python3.9 -m pip install -r /opt/requirements.txt --user
-    # - name: PythonEnv | add path .local/bin to /etc/profile.d/python_path.sh
-    #   action: template src=python_path.sh.j2 dest="/etc/profile.d/python_path.sh" mode=0644
+    - name: PythonEnv | Venv setup
+      shell:
+        cmd: /opt/python{{ python_version[:3] }}/bin/python3.9 -m pip install -r /opt/requirements.txt --user
+    - name: PythonEnv | add path .local/bin to /etc/profile.d/python_path.sh
+      action: template src=python_path.sh.j2 dest="/etc/profile.d/python_path.sh" mode=0644
 
     - name: .EMACS | get .emacs git repository
       become: yes

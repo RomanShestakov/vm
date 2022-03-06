@@ -19,7 +19,7 @@ system("
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider "docker" do |docker|
     # build using the image from the docker hub
-    docker.image = "vm:5.0"
+    docker.image = "rshestakov/vm:6.0"
     # build using local Dockerfile
     # docker.build_dir = "."
     docker.has_ssh = true

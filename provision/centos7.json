@@ -31,8 +31,8 @@
   "post-processors": [
       {
           "type": "docker-tag",
-          "repository": "vm",
-          "tag": "5.0"
+          "repository": "rshestakov/vm",
+          "tag": "6.0"
       }
   ]
 }
