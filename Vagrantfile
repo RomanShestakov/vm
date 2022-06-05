@@ -18,10 +18,19 @@ system("
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider "docker" do |docker|
-    # build using the image from the docker hub
-    docker.image = "rshestakov/vm:6.0"
+    # ***************************************
+    # option 1 -
+    # build using the existing image from the docker hub
+    # to build this image and load it to the docker hub
+    # see README
+    # docker.image = "rshestakov/vm:6.0"
+    # ***************************************
+    # option 2 -
+    # build docker container locally from scratch
+    # and them run ansible to install all the required packages
     # build using local Dockerfile
-    # docker.build_dir = "."
+    docker.build_dir = "."
+    # ***************************************
     docker.has_ssh = true
     docker.privileged = true
     docker.remains_running = true
@@ -43,13 +52,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # sync folders
   config.vm.synced_folder "/Users/romanshestakov/development", "/home/vagrant/development"
 
-  # # run ansible
-  # config.vm.provision "ansible" do |ansible|
-  #   ansible.compatibility_mode="2.0"
-  #   ansible.sudo = true
-  #   ansible.verbose = "vvv"
-  #   #ansible.playbook = 'provision/ansible/playbooks/vm.yml'
-  #   ansible.playbook = 'provision/ansible/playbooks/base.yml'
-  #   ansible.host_key_checking = false
-  # end
+  # part of Option2 - when docker container is built locally
+  # run ansible
+  config.vm.provision "ansible" do |ansible|
+    ansible.compatibility_mode="2.0"
+    ansible.sudo = true
+    ansible.verbose = "vvv"
+    ansible.playbook = 'provision/ansible/playbooks/base.yml'
+    ansible.host_key_checking = false
+  end
 end

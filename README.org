@@ -40,6 +40,12 @@ The build might take few hours as ansible roles will build gcc, llvm, etc from s
 packer build provision/centos7.json
 #+END_SRC
 
+* Push Docker image to dockerHub
+#+BEGIN_SRC
+docker login -u "rshestakov" -p <password> docker.io
+docker push rshestakov/vm:6.
+#+END_SRC
+
 * Build vagrant image based on Docker image
 #+BEGIN_SRC
 vagrant up
