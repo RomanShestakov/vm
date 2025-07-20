@@ -1,3 +1,0 @@
-# file: ansible-role-gtest/tasks/main.yml
-
-- include: 'compile-gtest.yml'

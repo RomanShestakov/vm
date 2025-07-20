@@ -1,3 +1,0 @@
-# file: ansible-role-flatbuffers/tasks/main.yml
-
-- include_tasks: 'compile-fb.yml'

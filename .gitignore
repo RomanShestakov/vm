@@ -1,5 +1,3 @@
 *~
-provision/ansible/playbooks/roles/external/*
-doc/*
-.vagrant/*
-log/*
+src/playbooks/roles/external/*
+*.log

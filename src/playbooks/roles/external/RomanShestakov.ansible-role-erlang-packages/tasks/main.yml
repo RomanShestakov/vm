@@ -1,5 +1,0 @@
----
-# tasks/main.yml
-
-- include: 'wxWidgets.yml'
-...
