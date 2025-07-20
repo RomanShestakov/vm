@@ -9,7 +9,7 @@
         path: /scratch
         state: directory
         mode: '0777'
-    - name: Create a directory for custon facts
+    - name: Create a directory for custom facts
       file:
         path: /etc/ansible/facts.d
         state: directory
