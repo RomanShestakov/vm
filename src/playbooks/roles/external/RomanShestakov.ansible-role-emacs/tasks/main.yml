@@ -1,0 +1,7 @@
+---
+
+# file: tasks/main.yml
+
+- include_tasks: deps.yml
+- include_tasks: build.yml
+...

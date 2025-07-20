@@ -1,0 +1,77 @@
+---
+
+# file: tasks/main.yml
+
+- name: EMACS | check if install exists
+  stat:
+    path: "{{ emacs_install_dir }}/bin/{{ emacs_version }}"
+  register: emacs_exists
+
+- name: EMACS | Get EMACS sources
+  become: true
+  get_url: url="{{ emacs_url }}" dest="{{ emacs_tmp }}" timeout=180 force=no
+  when: not emacs_exists.stat.exists
+  register: emacs_downloaded
+
+- name: EMACS | Extract EMACS sources
+  become: true
+  unarchive: src="{{ emacs_tmp }}"
+             dest="/tmp"
+             creates="{{ emacs_build }}"
+             remote_src=yes
+  when: emacs_downloaded.changed
+  register: emacs_extract
+
+- name: EMACS | make emacs configure file
+  ansible.builtin.command:
+    cmd:
+      ./autogen.sh
+    chdir:
+      "{{ emacs_build }}"
+  when: emacs_downloaded.changed
+  register: emacs_autogen
+
+# https://practical.li/blog/posts/build-emacs-from-source-on-ubuntu-linux/
+- name: EMACS | configure emacs Makefile
+  ansible.builtin.command:
+    chdir:
+      "{{ emacs_build }}"
+    cmd:
+      ./configure
+      --prefix="{{ emacs_install_dir }}"
+      --with-tree-sitter
+      --with-native-compilation=aot
+      --with-file-notification=inotify
+      --with-json
+      --without-x-toolkit
+      --without-x
+  when: emacs_autogen.changed
+  register: emacs_configure
+
+- name: EMACS | make emacs
+  ansible.builtin.command:
+    chdir:
+      "{{ emacs_build }}"
+    cmd:
+      make
+  become: true
+  when: emacs_configure.changed
+  register: emacs_build
+
+- name: EMACS | install emacs
+  ansible.builtin.command:
+    chdir:
+      "{{ emacs_build }}"
+    cmd:
+      make install
+  become: true
+  when: emacs_build.changed
+  register: emacs_install
+
+- name: EMACS | cleanup tmp
+  become: true
+  file:
+    path: "{{ emacs_tmp }}"
+    state: absent
+  when: emacs_install.changed
+...

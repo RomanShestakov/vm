@@ -1,0 +1,4 @@
+# file: ansible-role-zmq/tasks/main.yml
+
+- include: 'compile-zmq.yml'
+- include: 'compile-cppzmq.yml'

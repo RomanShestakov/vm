@@ -1,0 +1,6 @@
+# file: tasks/main.yml
+
+- include_tasks: compile.yml
+- include_tasks: elixir.yml
+
+...

@@ -1,0 +1,60 @@
+---
+
+# file: tasks/main.yml
+
+# - name: wxWidgets | check if install exists
+#   cmd:
+#     wx-config --version
+#   register: wxWidgets_exists
+
+- name: wxWidgets | Get wxWidgets sources
+  become: true
+  get_url: url="{{ wxWidgets_url }}" dest="{{ wxWidgets_tmp }}" timeout=180 force=no
+#  when: not wxWidgets_exists.stat.exists
+  register: wxWidgets_downloaded
+
+- name: wxWidgets | Extract wxWidgets sources
+  become: true
+  unarchive: src="{{ wxWidgets_tmp }}"
+             dest="/tmp"
+             creates="{{ wxWidgets_build }}"
+             remote_src=yes
+  when: wxWidgets_downloaded.changed
+  register: wxWidgets_extract
+
+- name: wxWidgets | configure wxWidgets Makefile
+  ansible.builtin.command:
+    chdir:
+      "{{ wxWidgets_build }}"
+    cmd:
+      ./configure
+      # --prefix="{{ emacs_install_dir }}"
+      # --with-tree-sitter
+      # --with-native-compilation=aot
+      # --with-file-notification=inotify
+      # --with-json
+      # --without-x-toolkit
+      # --without-x
+  when: wxWidgets.changed
+  register: wxWidgets_configure
+
+- name: wxWidgets | make and install wxWidgets
+  ansible.builtin.command:
+    chdir:
+      "{{ wxWidgets_build }}"
+    cmd:
+      make install
+  become: true
+  when: wxWidgets_configure.changed
+  register: wxWidgets_install
+
+- name: wxWidgets | cleanup tmp
+  become: true
+  file:
+    path: "{{ wxWidgets_tmp }}"
+    state: absent
+  when: wxWidgets_install.changed
+...
+
+
+

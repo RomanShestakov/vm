@@ -1,0 +1,61 @@
+---
+# base.yml - play to install a VM
+- name: base.yml
+  hosts: all
+
+  pre_tasks:
+    - name: Create a directory to compile
+      file:
+        path: /scratch
+        state: directory
+        mode: '0777'
+
+  roles:
+    - role: RomanShestakov.ansible-environment
+      become: yes
+      vars:
+        environment_config:
+          LANG: en_US.UTF-8
+          LC_ALL: en_US.UTF-8
+
+    - role: RomanShestakov.ansible-role-common-tools
+      become: yes
+      tags: ["build-common"]
+
+    # - role: RomanShestakov.ansible-role-flatbuffers
+    #   fb_version: v22.12.06
+    #   tags: ["fb"]
+
+    - role: RomanShestakov.ansible-role-emacs
+      become: yes
+      emacs_version: "29.1"
+      tags: ["emacs"]
+
+    - role: RomanShestakov.ansible-role-dotfiles
+      become: no
+      dotfiles_repo_url: "https://github.com/RomanShestakov/dotfiles.git"
+      dotfiles_dest: "~/"
+
+  post_tasks:
+
+    - name: .EMACS | get .emacs.d git repository
+      become: no
+      ansible.builtin.git:
+        repo: "https://github.com/RomanShestakov/.emacs.d.git"
+        dest: "~/"
+        #accept_hostkey: yes
+        force: yes
+
+    - name: Create a directory to write mem dumps, if it does not exist
+      file:
+        path: /tmp/cores
+        state: directory
+        mode: '0777'
+
+    - name: Set kernel.core_pattern in sysctl
+      sysctl:
+        name: kernel.core_pattern
+        value: "/tmp/cores/core.%e.%p.%h.%"
+        state: present
+        reload: yes
+...

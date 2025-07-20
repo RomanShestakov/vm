@@ -1,0 +1,4 @@
+# meta/main.yml
+
+- include_tasks: 'dotfiles.yml'
+- include_tasks: 'emacs.yml'

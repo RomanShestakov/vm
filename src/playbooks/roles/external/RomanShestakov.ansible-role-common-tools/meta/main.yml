@@ -1,0 +1,16 @@
+# file: ansible-role-common-tools/meta/main.yml
+
+galaxy_info:
+  author: ros
+  description: Install common useful tools
+  min_ansible_version: 0.1
+  license: MIT
+  platforms:
+  - name: Centos
+    versions:
+    - all
+  categories:
+  - system
+
+# dependencies:
+#   - {role: ANXS.build-essential, tags: build-essential }

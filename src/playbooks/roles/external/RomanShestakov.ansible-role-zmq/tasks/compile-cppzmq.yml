@@ -1,0 +1,47 @@
+# file: ansible-role-zmq/tasks/compile-cppzmq.yml
+
+- name: CPPZMQ | check if CPPZMQ is already installed
+  stat:
+    path: "{{ cppzmq_install_dir }}/include/zmq_addon.hpp"
+  register: cppzmq_exists
+
+- name: CPPZMQ | get from git repository
+  git: repo="{{ cppzmq_repo_url }}"
+       dest="{{ cppzmq_tmp }}"
+       version="{{ cppzmq_version }}"
+  when: not cppzmq_exists.stat.exists
+  register: cppzmq_downloaded
+
+- name: CPPZMQ | Make build folder
+  become: true
+  file: path="{{ cppzmq_build_dir }}" state=directory
+  when: cppzmq_downloaded.changed
+
+- name: CPPZMQ | cmake
+  become: true
+  command: chdir={{ cppzmq_build_dir }} cmake -DCMAKE_INSTALL_PREFIX={{ cppzmq_install_dir }} {{ cppzmq_tmp }}
+  when: cppzmq_downloaded.changed
+
+- name: CPPZMQ | make
+  become: true
+  command: chdir="{{ cppzmq_build_dir }}" make
+  when: cppzmq_downloaded.changed
+
+- name: CPPZMQ | install
+  become: true
+  command: chdir="{{ cppzmq_build_dir }}" make install
+  when: cppzmq_downloaded.changed
+
+- name: CPPZMQ | cleanup build dir
+  become: true
+  file:
+    path: "{{ cppzmq_build_dir }}"
+    state: absent
+  when: cppzmq_downloaded.changed
+
+- name: CPPZMQ | cleanup tmp dir
+  become: true
+  file:
+    path: "{{ cppzmq_tmp }}"
+    state: absent
+  when: cppzmq_downloaded.changed

@@ -1,0 +1,8 @@
+# file: defaults/main.yml
+
+# BOOST
+boost_version: 1.81.0
+# boost_repo_url: "https://github.com/boostorg/boost.git"
+boost_repo_url: "https://boostorg.jfrog.io/artifactory/main/release/{{boost_version}}/source/"
+boost_tmp: "/scratch/boost-{{boost_version}}"
+boost_install_dir: "/usr/local"

@@ -1,0 +1,7 @@
+# main.yml
+dotfiles_tmp: "/tmp/dotfiles"
+run_bootstrap: True
+dotfiles_repo_url: "https://github.com/RomanShestakov/dotfiles.git"
+emacs_repo_url: "https://github.com/RomanShestakov/.emacs.d.git"
+emacs_dest: "~/"
+dotfiles_dest: "~/"

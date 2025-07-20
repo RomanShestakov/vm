@@ -1,0 +1,47 @@
+# file: ansible-role-zmq/tasks/source.yml
+
+- name: ZMQ | check if ZMQ is already installed
+  stat:
+    path: "{{ zmq_install_dir }}/include/zmq.hpp"
+  register: zmq_exists
+
+- name: ZMQ | get from git repository
+  git: repo="{{ zmq_repo_url }}"
+       dest="{{ zmq_tmp }}"
+       version="{{ zmq_version }}"
+  when: not zmq_exists.stat.exists
+  register: zmq_downloaded
+
+- name: ZMQ | Make build folder
+  become: true
+  file: path="{{ zmq_build_dir }}" state=directory
+  when: zmq_downloaded.changed
+
+- name: ZMQ | cmake
+  become: true
+  command: chdir={{ zmq_build_dir }} cmake -DCMAKE_INSTALL_PREFIX={{ zmq_install_dir }} {{ zmq_tmp }}
+  when: zmq_downloaded.changed
+
+- name: ZMQ | make
+  become: true
+  command: chdir="{{ zmq_build_dir }}" make
+  when: zmq_downloaded.changed
+
+- name: ZMQ | install
+  become: true
+  command: chdir="{{ zmq_build_dir }}" make install
+  when: zmq_downloaded.changed
+
+- name: ZMQ | cleanup build dir
+  become: true
+  file:
+    path: "{{ zmq_build_dir }}"
+    state: absent
+  when: zmq_downloaded.changed
+
+- name: ZMQ | cleanup tmp dir
+  become: true
+  file:
+    path: "{{ zmq_tmp }}"
+    state: absent
+  when: zmq_downloaded.changed

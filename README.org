@@ -4,81 +4,29 @@
 
 * Description
 
-A Vagrant VM using Docker provider and provisioned with ansible.  This
-VM is used for development purposes and uses Centos7.  Ansible roles
-are used to build gcc, llvm and some other packages from sources.  I
-want to be able to use the same environment using different CPU
-archetectures - e.g. x86 or Apple M1 chip (aarch64) so the best way to
-archive this is to use Docker as VirtualBox hypervisor doesn't work
-for M1.
+Ansible based configuration used to setup development hosts. This
+Vcoub be used with Ubuntu, Centos7 and AWS linux2022.  Ansible roles
+are used to build gcc, llvm and some other packages from sources.
 
-* Intall Docker Desktop
-
-As the vagrant need a provider - install Docker on the host computer first.
-
-I tested with Docker Desktop 4.4.2
-https://docs.docker.com/desktop/mac/release-notes/#docker-desktop-442
-
-* Install Ansible
+* how to use
+** Install Ansible
 #+BEGIN_SRC
 $ brew install ansible
 #+END_SRC
 
-* Install Packer
+** Run make
 #+BEGIN_SRC
-$ brew install packer
+$ make run_localhost
 #+END_SRC
 
-* Install Vagrant
-#+BEGIN_SRC
-https://www.vagrantup.com/downloads.html
-#+END_SRC
+check Makefile for different targets
 
-* Build with packer Docker image
-The build might take few hours as ansible roles will build gcc, llvm, etc from sources
-#+BEGIN_SRC
-packer build provision/centos7.json
-#+END_SRC
-
-* Push Docker image to dockerHub
-#+BEGIN_SRC
-docker login -u "rshestakov" -p <password> docker.io
-docker push rshestakov/vm:6.
-#+END_SRC
-
-* Build vagrant image based on Docker image
-#+BEGIN_SRC
-vagrant up
-#+END_SRC
-
-* SSH to the vagrant VM
-#+BEGIN_SRC
-vagrant ssh
-#+END_SRC
-
-* SSH to the vagrant VM
-#+BEGIN_SRC
-vagrant ssh-config
-ssh -o "StrictHostKeyChecking=no" -i .vagrant/machines/default/docker/private_key vagrant@localhost -p 2222
-#+END_SRC
-
-* Some things to notice
-  ** How external ansible roles are applied
-  As part of the VM provision Vagrant will execute ansible role to apply certain configurations.
-  This is triggered by the following line in the Vagrantfile
-  #+BEGIN_SRC
-      ansible.playbook = 'provision/ansible/playbooks/base.yml'
-  #+END_SRC
-
-  Vagrant also executes the following snippet which run role_update.sh script
-  which pulls from hithub all the required by the base.yml ansible roles.
-  #+BEGIN_SRC
-  system("
-    if [ #{ARGV[0]} = 'up' ]; then
-        echo 'You are doing vagrant up and can execute your script'
-        ./provision/scripts/role_update.sh
-    fi
-    ")
-  #+END_SRC
-
-  The list of the roles is defined in the vm/provision/ansible/playbooks/roles/roles_requirements.yml
+* How the project is structured
+** src/playbooks - contains ansible playbook
+** config - used for different ansible.cfg files used for different cases.
+in Makefile while executing a specific host target ANSIBLE_CONFIG=./config/local/ansible.cfg is set to point to a required config
+** inventory - different inventory files, in Makefile specified by -i ./inventory/local_inventory.txt
+** bin/role_update.sh - is used to pull ansible roles which are used during host provision. The roles are put into src/playbooks/roles/external
+this location is specified in ansible.cfg files like:
+roles_path=../../src/playbooks/roles/internal:../../src/playbooks/roles/external 
+so the playbook could find the roles

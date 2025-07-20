@@ -1,0 +1,12 @@
+---
+# file: defaults/main.yml
+
+local_user: "vagrant"
+
+wxWidgets_version: "3.2.4"
+wxWidgets_url: "https://github.com/wxWidgets/wxWidgets/releases/download/v{{wxWidgets_version}}/wxWidgets-{{wxWidgets_version}}.tar.bz2"
+wxWidgets_tmp: "/tmp/wxWidgets-{{wxWidgets_version}}.tar.bz2"
+wxWidgets_build: "/tmp/wxWidgets-{{wxWidgets_version}}"
+wxWidgets_install_dir: "/usr/local"
+
+...

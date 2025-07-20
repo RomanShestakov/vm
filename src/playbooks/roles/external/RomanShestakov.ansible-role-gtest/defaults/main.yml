@@ -1,0 +1,7 @@
+# file: ansible-role-gtest/defaults/main.yml
+
+gtest_repo_url: https://github.com/google/googletest.git
+gtest_version: v1.12.0
+gtest_tmp: /tmp/gtest
+gtest_build_dir: /tmp/gtest-{{gtest_version}}-build
+gtest_install_dir: /usr/local

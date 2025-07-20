@@ -1,0 +1,48 @@
+---
+
+# - name: Elixir | check if install exists
+#   stat:
+#     path: "{{ elixir_install_dir }}/bin/iex"
+#   register: elixir_exists
+
+- name: Elixir | Get Elixir sources
+  become: true
+  get_url: url="{{ elixir_url }}" dest="{{ elixir_tmp }}" timeout=180 force=no
+  #when: not elixir_exists.stat.exists
+  register: elixir_downloaded
+
+- name: Elixir | Extract Elixir sources
+  become: true
+  unarchive: src="{{ elixir_tmp }}"
+             dest="/tmp"
+             creates="{{ elixir_build }}"
+             remote_src=yes
+  #when: elixir_downloaded.changed
+  register: elixir_extract
+
+# - name: OTP | Configure
+#   become: true
+#   shell: chdir="{{otp_build}}" ./configure --prefix="{{otp_install_dir}}"
+#   when: otp_extract.changed
+#   register: otp_configure
+
+- name: Elixir | Make
+  become: true
+  shell: chdir="{{elixir_build}}" make
+  #when: elixir_extract.changed
+  register: elixir_make
+
+- name: Elixir | Install
+  become: true
+  shell: chdir="{{elixir_build}}" make install
+  #when: elixir_make.changed
+  register: elixir_install
+
+# - name: Elixir | cleanup tmp
+#   become: true
+#   file:
+#     path: "{{ elixir_tmp }}"
+#     state: absent
+#   #when: elixir_install.changed
+
+...

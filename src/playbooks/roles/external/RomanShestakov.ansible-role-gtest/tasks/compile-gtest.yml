@@ -1,0 +1,47 @@
+# file: ansible-role-gtest/tasks/source.yml
+
+- name: GTEST | check if GTEST is already installed
+  stat:
+    path: "{{ gtest_install_dir }}/include/gtest"
+  register: gtest_exists
+
+- name: GTEST | get from git repository
+  git: repo="{{ gtest_repo_url }}"
+       dest="{{ gtest_tmp }}"
+       version="{{ gtest_version }}"
+  when: not gtest_exists.stat.exists
+  register: gtest_downloaded
+
+- name: GTEST | Make build folder
+  become: true
+  file: path="{{ gtest_build_dir }}" state=directory
+  when: gtest_downloaded.changed
+
+- name: GTEST | cmake
+  become: true
+  command: chdir={{ gtest_build_dir }} cmake {{ gtest_tmp }}
+  when: gtest_downloaded.changed
+
+- name: GTEST | make
+  become: true
+  command: chdir="{{ gtest_build_dir }}" make
+  when: gtest_downloaded.changed
+
+- name: GTEST | install
+  become: true
+  command: chdir="{{ gtest_build_dir }}" make install
+  when: gtest_downloaded.changed
+
+- name: GTEST | cleanup build dir
+  become: true
+  file:
+    path: "{{ gtest_build_dir }}"
+    state: absent
+  when: gtest_downloaded.changed
+
+- name: GTEST | cleanup tmp dir
+  become: true
+  file:
+    path: "{{ gtest_tmp }}"
+    state: absent
+  when: gtest_downloaded.changed

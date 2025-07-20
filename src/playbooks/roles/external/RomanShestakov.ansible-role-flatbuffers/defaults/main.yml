@@ -1,0 +1,7 @@
+# file: ansible-role-flatbuffers/defaults/main.yml
+
+fb_repo_url: https://github.com/google/flatbuffers.git
+fb_version: v22.12.06
+fb_tmp: /tmp/fb
+fb_build_dir: /tmp/fb-{{fb_version}}-build
+fb_install_dir: /usr/local
