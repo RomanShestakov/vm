@@ -13,7 +13,7 @@
       file:
         path: /etc/ansible/facts.d
         state: directory
-        recursive: yes
+        recurse: yes
         mode: '0777'
         
   roles:
