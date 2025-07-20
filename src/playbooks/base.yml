@@ -9,7 +9,13 @@
         path: /scratch
         state: directory
         mode: '0777'
-
+    - name: Create a directory for custon facts
+      file:
+        path: /etc/ansible/facts.d
+        state: directory
+        recursive: yes
+        mode: '0777'
+        
   roles:
     - role: RomanShestakov.ansible-environment
       become: yes
