@@ -11,8 +11,15 @@ are used to build gcc, llvm and some other packages from sources.
 * how to use
 ** Install Ansible
 #+BEGIN_SRC
+# linux  
+$ sudo apt-get install ansible
+#+END_SRC
+
+#+BEGIN_SRC
+# mac
 $ brew install ansible
 #+END_SRC
+
 
 ** Run make
 #+BEGIN_SRC
