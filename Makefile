@@ -6,8 +6,8 @@ update_external_roles:
 
 run_localhost: update_external_roles
 	@echo run ansible for localhost... $<
-	ANSIBLE_CONFIG=./config/local/ansible.cfg ansible-playbook src/playbooks/base.yml -i ./inventory/local_inventory.txt
+	ANSIBLE_CONFIG=./config/local/ansible.cfg ansible-playbook src/playbooks/base.yml -i ./inventory/localhost_inventory.txt
 
-run_ms01_host: update_external_roles
+run_ms01: update_external_roles
 	@echo run ansible for ms01 ... $<
 	ANSIBLE_CONFIG=./config/ms01/ansible.cfg ansible-playbook src/playbooks/base.yml -i ./inventory/ms01_inventory.txt
