@@ -38,23 +38,23 @@
 
   post_tasks:
 
-    - name: .EMACS | Check if file exists
-      stat:
-        path: "~/.emacs.d"
-      register: result
+    # - name: .EMACS | Check if file exists
+    #   stat:
+    #     path: "~/.emacs.d"
+    #   register: result
 
-    - name: Show result
-      debug:
-        msg: "The file does not exist!"
-      when: not result.stat.exists
+    # - name: Show result
+    #   debug:
+    #     msg: "The file does not exist!"
+    #   when: not result.stat.exists
       
-    - name: .EMACS | get .emacs.d git repository
-      become: no
-      ansible.builtin.git:
-        repo: "https://github.com/RomanShestakov/.emacs.d.git"
-        dest: "~/"
-        force: yes
-      when: not result.stat.exists
+    # - name: .EMACS | get .emacs.d git repository
+    #   become: no
+    #   ansible.builtin.git:
+    #     repo: "https://github.com/RomanShestakov/.emacs.d.git"
+    #     dest: "~/"
+    #     force: yes
+    #   when: not result.stat.exists
 
     - name: Create a directory to write mem dumps, if it does not exist
       file:
