@@ -9,12 +9,6 @@
         path: /scratch
         state: directory
         mode: '0777'
-    - name: Create a directory for custom facts
-      file:
-        path: /etc/ansible/facts.d
-        state: directory
-        recurse: yes
-        mode: '0777'
         
   roles:
     - role: RomanShestakov.ansible-environment
@@ -44,12 +38,23 @@
 
   post_tasks:
 
+    - name: .EMACS | Check if file exists
+      stat:
+        path: "~/.emacs.d"
+      register: result
+
+    - name: Show result
+      debug:
+        msg: "The file does not exist!"
+      when: not result.stat.exists
+      
     - name: .EMACS | get .emacs.d git repository
       become: no
       ansible.builtin.git:
         repo: "https://github.com/RomanShestakov/.emacs.d.git"
         dest: "~/"
         force: no
+      when: not result.stat.exists
 
     - name: Create a directory to write mem dumps, if it does not exist
       file:
