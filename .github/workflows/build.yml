@@ -13,6 +13,13 @@ jobs:
     runs-on: ${{ matrix.config.os }}
     strategy:
       fail-fast: false
+      matrix:
+        config:
+        - {
+            name: "VM buils",
+            os: "ubuntu-latest",
+          }
+      
     steps:
       - uses: actions/checkout@v2
 
