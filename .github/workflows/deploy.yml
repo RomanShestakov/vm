@@ -1,0 +1,264 @@
+# name: Piramide Build / Release  / Deploy
+
+# # Controls when the action will run. Triggers the workflow on push
+# on:
+#   push:
+#   pull_request:
+#   release:
+#     types: [published]
+#     # tags:
+#     # - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+# env:
+#   # AWS_REGION: us-west-1                   # set this to your preferred AWS region, e.g. us-west-1
+#   # ECR_REPOSITORY: 449342719819.dkr.ecr.us-east-1.amazonaws.com/piramide           # set this to your Amazon ECR repository name
+#   # ECS_SERVICE: MY_ECS_SERVICE                 # set this to your Amazon ECS service name
+#   # ECS_CLUSTER: arn:aws:ecs:us-east-1:449342719819:cluster/piramide                 # set this to your Amazon ECS cluster name
+#   # ECS_TASK_DEFINITION: MY_ECS_TASK_DEFINITION # set this to the path to your Amazon ECS task definition
+#   #                                              # file, e.g. .aws/task-definition.json
+#   # CONTAINER_NAME: piramide           # set this to the name of the container in the
+#   #                                              # containerDefinitions section of your task definition
+
+
+
+#   AWS_REGION: us-east-1                   # set this to your preferred AWS region, e.g. us-west-1
+#   #ECR_REPOSITORY: 449342719819.dkr.ecr.us-east-1.amazonaws.com/piramide:latest
+#   ECR_REPOSITORY: piramide
+#   ECS_SERVICE: piramide
+#   #ECS_SERVICE: piramide
+#   ECS_CLUSTER: piramide
+#   ECS_TASK_DEFINITION: .aws/task-definition.json
+#   CONTAINER_NAME: piramide           # set this to the name of the container in the
+#                                                # containerDefinitions section of your task definition
+
+# permissions: write-all
+
+
+
+# # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# jobs:
+
+#     # This workflow contains a single job called "build"
+#   build:
+#     # The type of runner that the job will run on
+#     name: ${{ matrix.config.name }}
+#     runs-on: ${{ matrix.config.os }} # будет запускаться по очереди на всех типах машин
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#         config:
+#         - {
+#             name: "Ubuntu_GCC_9",
+#             os: "ubuntu-latest",
+#             artifact: "piramide.tar.gz",
+#             build_type: "Release",
+#             cc: "gcc",
+#             cxx: "g++",
+#             archiver: "tar",
+#             path: "build"
+#           }
+
+
+#     steps:
+#       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+#       - uses: actions/checkout@v2
+
+#       - name: Print env
+#         run: |
+#           echo github.event.action: ${{ github.event.action }}
+#           echo github.event_name: ${{ github.event_name }}
+
+#       - name: Install dependencies on ubuntu-latest
+#         run: |
+#           echo Update gcc-9 =======================================================================
+#           echo gcc version before
+#           gcc --version
+#           #sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+#           sudo apt-get update
+#           sudo apt-get install cmake pkg-config cmake-data gcc-9 g++-9 libwebsockets-dev libcurl4-openssl-dev libjsoncpp-dev libmbedtls-dev
+#           echo gcc version after
+#           gcc --version
+#           echo Update cmake =======================================================================
+#           echo cmake version before
+#           cmake --version
+
+#       - name: Configure
+#         shell: bash
+#         run: ./configure.sh
+
+#       - name: Build
+#         shell: bash
+#         run: ./build.sh
+
+#       - name: Install Strip
+#         shell: bash
+#         run: ./install.sh
+
+#       - name: version
+#         id: version
+#         shell: bash
+#         working-directory: ${{ matrix.config.path }}
+#         run: echo "::set-output name=version::$( piramide_install/bin/version )"
+
+#       - name: Print version
+#         run: |
+#           echo version: ${{ steps.version.outputs.version }}
+
+#       - name: Pack
+#         shell: bash
+#         working-directory: ${{ matrix.config.path }}
+#         run: |
+#           ls -laR
+#           ${{ matrix.config.archiver }} -czvf ${{ matrix.config.artifact }} piramide_install
+
+#       # - name: Upload
+#       #   uses: actions/upload-artifact@v2
+#       #   with:
+#       #     path: ${{ matrix.config.path }}
+#       #     name: ${{ matrix.config.artifact }}
+
+#       - name: Store artifact in Cache
+#         uses: actions/cache@v2
+#         id: piramide
+#         with:
+#           path: ${{ matrix.config.path }}/${{ matrix.config.artifact }}
+#           key: piramide
+
+#       # - name: release
+#       #   uses: actions/create-release@v1
+#       #   id: create_release
+#       #   with:
+#       #     draft: false
+#       #     prerelease: false
+#       #     # release_name: ${{ steps.version.outputs.version }}
+#       #     # #tag_name: ${{ github.ref }}
+#       #     # tag_name: "1.2.6"
+#       #     tag_name: ${{ github.run_number }}
+#       #     release_name: Release ${{ github.run_number }}
+#       #     body: |
+#       #       Chnages in this release:
+#       #         - first
+#       #         - second
+#       #   env:
+#       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+
+#       # - name: upload linux artifact
+#       #   #if: github.event_name == 'release' && (github.event.action == 'published' || github.event.action == 'created')
+#       #   if: github.event_name == 'release'
+#       #   uses: actions/upload-release-asset@v1
+#       #   env:
+#       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       #   with:
+#       #     upload_url: ${{ github.event.release.upload_url }}
+#       #     asset_path: ${{ matrix.config.path }}/${{ matrix.config.artifact }}
+#       #     asset_name: ${{ matrix.config.artifact }}
+#       #     asset_content_type: application/gzip
+
+#       # - name: clean old releases
+#       #   uses: dev-drprasad/delete-older-releases@v0.2.0
+#       #   with:
+#       #     #repo: <owner>/<repoName> # defaults to current repo
+#       #     keep_latest: 3
+#       #     #delete_tag_pattern: beta # defaults to ""
+#       #   env:
+#       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+#   release:
+#     name: Release
+#     runs-on: ubuntu-latest
+#     needs:
+#       - build
+
+#     environment: production
+
+#     steps:
+
+#       - name: reStore artifact from Cache
+#         if: github.event_name == 'release' && (github.event.action == 'published' || github.event.action == 'created')
+#         uses: actions/cache@v2
+#         id: piramide
+#         with:
+#           path: "build/piramide.tar.gz"
+#           key: piramide
+
+
+#       - name: upload linux artifact
+#         if: github.event_name == 'release' && (github.event.action == 'published' || github.event.action == 'created')
+#         uses: actions/upload-release-asset@v1
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         with:
+#           upload_url: ${{ github.event.release.upload_url }}
+#           asset_path: "build/piramide.tar.gz"
+#           asset_name: "piramide.tar.gz"
+#           asset_content_type: application/gzip
+
+#       - name: clean old releases
+#         if: github.event_name == 'release' && (github.event.action == 'published' || github.event.action == 'created')
+#         uses: dev-drprasad/delete-older-releases@v0.2.0
+#         with:
+#           #repo: <owner>/<repoName> # defaults to current repo
+#           keep_latest: 3
+#           #delete_tag_pattern: beta # defaults to ""
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+#   # deploy:
+#   #   name: Deploy
+#   #   runs-on: ubuntu-latest
+
+#   #   needs:
+#   #     - build
+
+#   #   environment: production
+
+#   #   steps:
+#   #   - name: Checkout
+#   #     uses: actions/checkout@v3
+
+#   #   - name: Configure AWS credentials
+#   #     uses: aws-actions/configure-aws-credentials@v1
+#   #     with:
+#   #       aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#   #       aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#   #       aws-region: ${{ env.AWS_REGION }}
+
+#   #   - name: Login to Amazon ECR
+#   #     id: login-ecr
+#   #     uses: aws-actions/amazon-ecr-login@v1
+
+#   #   - name: Build, tag, and push image to Amazon ECR
+#   #     id: build-image
+#   #     env:
+#   #       ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+#   #       IMAGE_TAG: ${{ github.sha }}
+#   #     run: |
+#   #       # Build a docker container and
+#   #       # push it to ECR so that it can
+#   #       # be deployed to ECS.
+#   #       docker build \
+#   #       --build-arg RELEASE_TOKEN="${{secrets.GITHUB_TOKEN}}" \
+#   #       --build-arg RELEASE_ID="${{github.run_number}}" \
+#   #       --file ./provision/aws/Dockerfile \
+#   #       -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+#   #       docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+#   #       echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
+#   #   - name: Fill in the new image ID in the Amazon ECS task definition
+#   #     id: task-def
+#   #     uses: aws-actions/amazon-ecs-render-task-definition@v1
+#   #     with:
+#   #       task-definition: ${{ env.ECS_TASK_DEFINITION }}
+#   #       container-name: ${{ env.CONTAINER_NAME }}
+#   #       image: ${{ steps.build-image.outputs.image }}
+
+#   #   - name: Deploy Amazon ECS task definition
+#   #     uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+#   #     with:
+#   #       task-definition: ${{ steps.task-def.outputs.task-definition }}
+#   #       service: ${{ env.ECS_SERVICE }}
+#   #       cluster: ${{ env.ECS_CLUSTER }}
+#   #       wait-for-service-stability: true
