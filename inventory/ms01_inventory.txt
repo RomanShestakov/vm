@@ -1,2 +1,2 @@
-# ms-01
+[ms01]
 192.168.1.137 ansible_connection=ssh ansible_user=romanshestakov
