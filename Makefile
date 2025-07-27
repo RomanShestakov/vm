@@ -22,7 +22,11 @@ run_adhoc:
 # ANSIBLE_CONFIG=./config/local/nsible.cfg ansible -i ./inventory/local_inventory.txt localhost -a "free -h"
 	ANSIBLE_CONFIG=./config/local/nsible.cfg ansible -i ./inventory/local_inventory.txt localhost -m command -a "free -h"
 
-run_vagrant_docker:
+run_vagrant_destroy:
+	@echo run vagrant destroy... $<
+	 sudo vagrant destroy
+
+run_vagrant_docker: run_vagrant_destroy
 	@echo run vagrant docker... $<
 # sudo vagrant destroy
 #vagrant plugin install vagrant-env
