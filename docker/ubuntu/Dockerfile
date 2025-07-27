@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:latest
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -108,3 +108,6 @@ RUN chmod 600 /home/vagrant/.ssh/authorized_keys; \
 # Run the init daemon
 VOLUME [ "/sys/fs/cgroup" ]
 CMD ["/usr/sbin/init"]
+
+
+
