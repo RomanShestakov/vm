@@ -32,6 +32,8 @@ this will run Vangrant to provision a docker container
 this is usefull becuase we can test provision inside a new docker container without impacting local host 
 #+BEGIN_SRC
 $ make run_vagrant_docker
+# to connect to docker vm  
+sudo vagrant ssh
 #+END_SRC
 
 
