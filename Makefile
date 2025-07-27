@@ -15,3 +15,15 @@ run_ms01: update_external_roles
 run_ping:
 	@echo run ansible ping ms01... $<
 	ANSIBLE_CONFIG=./config/ms01/ansible.cfg ansible -i ./inventory/ms01_inventory.txt ms01 -m ping
+
+run_adhoc:
+	@echo run ansible ad-hoc local... $<
+# can drop -m command - it is dfault module
+# ANSIBLE_CONFIG=./config/local/nsible.cfg ansible -i ./inventory/local_inventory.txt localhost -a "free -h"
+	ANSIBLE_CONFIG=./config/local/nsible.cfg ansible -i ./inventory/local_inventory.txt localhost -m command -a "free -h"
+
+run_vagrant_docker:
+	@echo run vagrant docker... $<
+# sudo vagrant destroy
+#vagrant plugin install vagrant-env
+	sudo vagrant up --provider=docker

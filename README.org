@@ -22,9 +22,18 @@ $ brew install ansible
 
 
 ** Run make
+this will run ansible book to update locate host
 #+BEGIN_SRC
 $ make run_localhost
 #+END_SRC
+
+** Run run_vagrant_docker
+this will run Vangrant to provision a docker container
+this is usefull becuase we can test provision inside a new docker container without impacting local host 
+#+BEGIN_SRC
+$ make run_vagrant_docker
+#+END_SRC
+
 
 check Makefile for different targets
 

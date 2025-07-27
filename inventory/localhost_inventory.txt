@@ -1,3 +1,4 @@
 
+[localhost]
 # to execute a playbook for localhost
 localhost ansible_connection=local ansible_user=romanshestakov
