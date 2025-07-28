@@ -28,7 +28,13 @@ $ make run_localhost
 #+END_SRC
 
 ** Run run_vagrant_docker
-this will run Vangrant to provision a docker container
+
+in case is docker has troubles connecting - 
+make sure to update vagrant. It installs private ssh key to ~/.vagrant.d and then uses it
+during docker container provision. The usecure public key is inserted into Docker container
+Vagrant account is added with NOPASSWD sudo access
+
+Runs Vangrant to provision a docker container
 this is usefull becuase we can test provision inside a new docker container without impacting local host 
 #+BEGIN_SRC
 $ make run_vagrant_docker
