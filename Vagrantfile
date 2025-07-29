@@ -61,7 +61,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ansible.sudo = true
     ansible.verbose = "vvv"
     ansible.playbook = 'src/playbooks/base.yml'
-    ansible.config_file = './config/local/ansible.cfg' 
+    ansible.config_file = './config/docker/ansible.cfg' 
     ansible.host_key_checking = false
     # ansible.extra_vars = {
     # }
