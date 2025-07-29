@@ -48,9 +48,11 @@ check Makefile for different targets
 * How the project is structured
 ** src/playbooks - contains ansible playbook
 ** config - used for different ansible.cfg files used for different cases.
-in Makefile while executing a specific host target ANSIBLE_CONFIG=./config/local/ansible.cfg is set to point to a required config
 ** inventory - different inventory files, in Makefile specified by -i ./inventory/local_inventory.txt
 ** bin/role_update.sh - is used to pull ansible roles which are used during host provision. The roles are put into src/playbooks/roles/external
 this location is specified in ansible.cfg files like:
 roles_path=../../src/playbooks/roles/internal:../../src/playbooks/roles/external 
 so the playbook could find the roles
+
+Makefile - used to run different tasks, while executing a specific host target e.g. ANSIBLE_CONFIG=./config/local/ansible.cfg is set to point to a required config
+Vagrant - used to ansible provision of the vangrant host with docker provider

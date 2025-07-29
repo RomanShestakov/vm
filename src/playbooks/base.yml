@@ -26,6 +26,10 @@
     #   fb_version: v22.12.06
     #   tags: ["fb"]
 
+    - role: RomanShestakov.ansible-role-otp
+      become: yes
+      tags: ["otp"]
+    
     - role: RomanShestakov.ansible-role-emacs
       become: yes
       emacs_version: "30.1"
