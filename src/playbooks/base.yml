@@ -33,6 +33,8 @@
     - role: RomanShestakov.ansible-role-emacs
       become: yes
       emacs_version: "30.1"
+      # allow to get binary of emacs for speedy install
+      emacs_from_sources: true
       tags: ["emacs"]
 
     - role: RomanShestakov.ansible-role-dotfiles
