@@ -50,10 +50,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # location of the private key
   config.ssh.private_key_path = ['~/.vagrant.d/insecure_private_key']
 
-  # sync folders
-  #config.vm.synced_folder "/Users/romanshestakov/development", "/home/vagrant/development"
-  config.vm.synced_folder "/home/romanshestakov/development", "/home/vagrant/development"
-
+  # sync folders - depending on where playbook is run
+  shared_folder_path_linux = "/home/romanshestakov/development"
+  shared_folder_path_mac = "/home/romanshestakov/development"
+  
+  # Check if the directory exists before attempting to sync
+  if File.directory?( shared_folder_path_linux )
+    config.vm.synced_folder shared_folder_path_linux, "/home/vagrant/development"
+  elsif File.directory?( shared_folder_path_mac )
+    config.vm.synced_folder shared_folder_path_mac, "/home/vagrant/development"
+  else
+    puts "WARNING!: The shared folder source '#{shared_folder_path_linux}' and '#{shared_folder_path_mac}' does not exist and will be skipped."
+  end
+  
   # part of Option2 - when docker container is built locally
   # run ansible
   config.vm.provision "ansible" do |ansible|
