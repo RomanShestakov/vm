@@ -4,7 +4,11 @@ update_external_roles:
 	@echo updating role ... $<
 	bin/role_update.sh
 
-run_localhost: update_external_roles
+lint: update_external_roles
+	@echo run lint ... $<
+	ANSIBLE_CONFIG=./config/local/ansible.cfg ansible-playbook src/playbooks/base.yml --syntax-check
+
+run_localhost: update_external_roles lint
 	@echo run ansible for localhost... $<
 	ANSIBLE_CONFIG=./config/local/ansible.cfg ansible-playbook src/playbooks/base.yml -i ./inventory/localhost_inventory.txt
 
@@ -20,7 +24,7 @@ run_adhoc:
 	@echo run ansible ad-hoc local... $<
 # can drop -m command - it is dfault module
 # ANSIBLE_CONFIG=./config/local/nsible.cfg ansible -i ./inventory/local_inventory.txt localhost -a "free -h"
-	ANSIBLE_CONFIG=./config/local/nsible.cfg ansible -i ./inventory/local_inventory.txt localhost -m command -a "free -h"
+	ANSIBLE_CONFIG=./config/local/ansible.cfg ansible -i ./inventory/local_inventory.txt localhost -m command -a "free -h"
 
 run_vagrant_destroy:
 	@echo run vagrant destroy... $<
