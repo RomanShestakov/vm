@@ -38,7 +38,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     docker.remains_running = true
     docker.volumes = ["/sys/fs/cgroup:/sys/fs/cgroup:rw"]
     # configure docker container
-    docker.create_args = [ '--cgroupns=host', '--cpuset-cpus=1', '--memory=6g' ]
+    #docker.create_args = [ '--cgroupns=host', '--cpuset-cpus=1', '--memory=6g' ]
+    docker.create_args = [ '--cgroupns=host', '--memory=6g' ]
   end
 
   # don't insert new private key
